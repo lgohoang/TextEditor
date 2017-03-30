@@ -1,4 +1,4 @@
-﻿
+﻿@model TextEditor.Models.DocxView
 @{
     ViewBag.Title = "Format";
 }
@@ -40,26 +40,26 @@
             <div class="panel-body row">
                 <div class="input-group col-md-2">
                     <span class="control-label">Lề trái</span>
-                    <input type="text" class="form-control">
+                    <input id="page_layout_margin_left" type="text" class="form-control">
                 </div>
                 <div class="input-group col-md-2">
                     <span class="control-label">Lề phải</span>
-                    <input type="text" class="form-control">
+                    <input id="page_layout_margin_right" type="text" class="form-control">
                 </div>
 
                 <div class="input-group col-md-2">
                     <span class="control-label">Lề trên</span>
-                    <input type="text" class="form-control">
+                    <input id="page_layout_margin_top" type="text" class="form-control">
                 </div>
 
                 <div class="input-group col-md-2">
                     <span class="control-label">Lề dưới</span>
-                    <input type="text" class="form-control">
+                    <input id="page_layout_margin_bottom" type="text" class="form-control">
                 </div>
 
                 <div class="input-group col-md-2">
                     <span class="control-label">Loại giấy</span>
-                    <input type="text" class="form-control">
+                    <input id="page_layout_size_paper_type" type="text" class="form-control">
                 </div>
 
                 <div class="input-group col-md-2">
@@ -130,14 +130,17 @@
 @section Scripts
 {
     <script>
+
         $(document).ready(function () {
             $('#txtUploadFile').on('change', function (e) {
                 var files = e.target.files;
                 if (files.length > 0) {
                     if (this.value.lastIndexOf('.docx') === -1) {
-                        alert('Only docx files are allowed!');
-                        this.value = '';
-                        return;
+                        if (this.value.lastIndexOf('.doc') === -1) {
+                            alert('Only docx, doc files are allowed!');
+                            this.value = '';
+                            return;
+                        }
                     }
                     if (window.FormData !== undefined) {
                         var data = new FormData();
@@ -153,6 +156,8 @@
                             data: data,
                             success: function (result) {
                                 console.log(result);
+                                var res = JSON.parse(result);
+                                Check(res);
                             },
                             error: function (xhr, status, p3, p4) {
                                 var err = "Error " + " " + status + " " + p3 + " " + p4;
@@ -167,6 +172,27 @@
                 }
             });
         });
+
+        function Check(obj) {
+            SetColorIfFail("page_layout_margin_top", obj.PageLayout.Margin.Top);
+            SetColorIfFail("page_layout_margin_bottom", obj.PageLayout.Margin.Bottom);
+            SetColorIfFail("page_layout_margin_left", obj.PageLayout.Margin.Left);
+            SetColorIfFail("page_layout_margin_right", obj.PageLayout.Margin.Right);
+            SetColorIfFail("page_layout_size_paper_type", obj.PageLayout.Size.PaperType);
+        }
+
+        function SetColorIfFail(id, value) {
+            var obj = document.getElementById(id);
+
+            if (obj.value == value) {
+                console.log("true");
+                obj.style.borderColor = "#0c829d";
+            } else {
+                obj.style.borderColor = "#FF0000";
+                console.log("false");
+            }
+        }
+
     </script>
 }
 

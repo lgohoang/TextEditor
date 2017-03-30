@@ -43,19 +43,18 @@ namespace TextEditor.Controllers
                         var convert = new Extends.Library.Convert();
                         var ml = convert.PaperClipsToCentimeters(doc.MarginLeft);
                         var view = new DocxView();
-                        view.Margin = new Margin();
-                        view.PageLayout = new Models.PageLayout();
+
+                        view.PageLayout.Margin.Top = doc.MarginTop;
+                        view.PageLayout.Margin.Bottom = doc.MarginBottom;
+                        view.PageLayout.Margin.Left = doc.MarginLeft;
+                        view.PageLayout.Margin.Right = doc.MarginRight;
+
+                        view.PageLayout.Size.Width = doc.PageWidth;
+                        view.PageLayout.Size.Height = doc.PageHeight;
+                        
+
                         var pps = new Models.PaperSize();
-
-                        view.Margin.Top = convert.Round(convert.PaperClipsToCentimeters(doc.MarginTop), 1);
-                        view.Margin.Bottom = convert.Round(convert.PaperClipsToCentimeters(doc.MarginBottom), 1);
-                        view.Margin.Left = convert.Round(convert.PaperClipsToCentimeters(doc.MarginLeft), 1);
-                        view.Margin.Right = convert.Round(convert.PaperClipsToCentimeters(doc.MarginRight), 1);
-
-                        view.PageLayout.Width = convert.Round(convert.PixelToCentimeter(doc.PageWidth, 72), 1);
-                        view.PageLayout.Height = convert.Round(convert.PixelToCentimeter(doc.PageHeight, 72), 1);
-
-                        var ppss = pps.PaperType(view.PageLayout);
+                        view.PageLayout.Size.PaperType = pps.PaperType(view.PageLayout.Size);
 
                         MemoryStream ms = new MemoryStream();
 
