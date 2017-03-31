@@ -70,15 +70,24 @@ namespace TextEditor.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+     
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+     
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Xác nhận password không đúng.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Họ tên")]
+        public string FullName { get; set; }
+
+        [Display(Name = "Số điện thoại")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
     }
 
     public class ResetPasswordViewModel
