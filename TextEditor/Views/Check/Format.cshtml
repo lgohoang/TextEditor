@@ -174,11 +174,11 @@
         });
 
         function Check(obj) {
-            SetColorIfFail("page_layout_margin_top", obj.PageLayout.Margin.Top);
-            SetColorIfFail("page_layout_margin_bottom", obj.PageLayout.Margin.Bottom);
-            SetColorIfFail("page_layout_margin_left", obj.PageLayout.Margin.Left);
-            SetColorIfFail("page_layout_margin_right", obj.PageLayout.Margin.Right);
-            SetColorIfFail("page_layout_size_paper_type", obj.PageLayout.Size.PaperType);
+            SetColorIfFail("page_layout_margin_top", obj.Page.Layout.Margin.Top);
+            SetColorIfFail("page_layout_margin_bottom", obj.Page.Layout.Margin.Bottom);
+            SetColorIfFail("page_layout_margin_left", obj.Page.Layout.Margin.Left);
+            SetColorIfFail("page_layout_margin_right", obj.Page.Layout.Margin.Right);
+            SetColorIfFail("page_layout_size_paper_type", obj.Page.Layout.Size.PaperType);
         }
 
         function SetColorIfFail(id, value) {

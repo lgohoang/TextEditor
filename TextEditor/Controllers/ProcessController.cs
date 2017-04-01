@@ -19,6 +19,8 @@ namespace TextEditor.Controllers
     [RoutePrefix("api/process")]
     public class ProcessController : ApiController
     {
+        const int cover = 0;
+
         [HttpPost]
         [Route("upload")]
         public async Task<HttpResponseMessage> UploadFile()
@@ -44,26 +46,33 @@ namespace TextEditor.Controllers
                         var ml = convert.PaperClipsToCentimeters(doc.MarginLeft);
                         var view = new DocxView();
 
-                        view.PageLayout.Margin.Top = doc.MarginTop;
-                        view.PageLayout.Margin.Bottom = doc.MarginBottom;
-                        view.PageLayout.Margin.Left = doc.MarginLeft;
-                        view.PageLayout.Margin.Right = doc.MarginRight;
-
-                        view.PageLayout.Size.Width = doc.PageWidth;
-                        view.PageLayout.Size.Height = doc.PageHeight;
-                        
-
+                        view.Page.Layout.Margin.Top = doc.MarginTop;
+                        view.Page.Layout.Margin.Bottom = doc.MarginBottom;
+                        view.Page.Layout.Margin.Left = doc.MarginLeft;
+                        view.Page.Layout.Margin.Right = doc.MarginRight;
+                        view.Page.Layout.Size.Width = doc.PageWidth;
+                        view.Page.Layout.Size.Height = doc.PageHeight;
                         var pps = new Models.PaperSize();
-                        view.PageLayout.Size.PaperType = pps.PaperType(view.PageLayout.Size);
+                        view.Page.Layout.Size.PaperType = pps.PaperType(view.Page.Layout.Size);
+
+                        int index = 0;
+                        foreach(var p in doc.Paragraphs)
+                        {
+                            if (index.Equals(cover))
+                            {
+                                foreach( var m in p.MagicText)
+                                {
+
+                                }
+                            }
+
+                            index++;
+                        }
 
                         MemoryStream ms = new MemoryStream();
-
                         DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
-
                         ser.WriteObject(ms, view);
-
                         string json = Encoding.Default.GetString(ms.ToArray());
-
                         var response = Request.CreateResponse(HttpStatusCode.OK);
                         response.Content = new StringContent(json, Encoding.UTF8, "text/plain");
                         response.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue(@"text/html");

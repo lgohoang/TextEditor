@@ -9,11 +9,28 @@ namespace TextEditor.Models
     {
         public DocxView()
         {
-            PageLayout = new PageLayout();
-            PageLayout.Margin = new Margin();
-            PageLayout.Size = new Size();
+            Page = new Page();
+            Cover = new Page();
         }
-        public PageLayout PageLayout { get; set; }
+        public Page Page { get; set; }
+        public Page Cover { get; set; }
+    }
+
+    public class Page
+    {
+        public Page()
+        {
+            Layout = new Layout();
+            Font = new Font();
+        }
+        public Layout Layout { get; set; }
+        public Font Font { get; set; }
+    }
+
+    public class Font
+    {
+        public float Size { get; set; }
+        public string Family { get; set; }
     }
 
     public class Margin
@@ -25,8 +42,13 @@ namespace TextEditor.Models
 
     }
 
-    public class PageLayout
+    public class Layout
     {
+        public Layout()
+        {
+            Size = new Size();
+            Margin = new Margin();
+        }
         public Size Size { get; set; }
         public Margin Margin { get; set; }
     }
