@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.navbar-inverse {
+    background-color: #20B1AA;
+    border-color: #20B1AA;
+    color: #fff;
+    border-radius: 0px;
+}
+
+.navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+    .navbar-inverse .navbar-brand a{
+        color: #808080;
+    }
+.navbar-inverse .navbar-brand a span:hover {
+        color: #eee;
+    }
+.panel-table{
+    padding:0;
+}
