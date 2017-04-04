@@ -16,15 +16,37 @@ namespace TextEditor.Models
         public Page Cover { get; set; }
     }
 
+    public class Paragraph
+    {
+        public Paragraph()
+        {
+            MagicText = new Dictionary<string, MagicText>();
+        }
+        public string Text { get; set; }
+        public string Alignment { get; set; }
+
+        public Dictionary<string, MagicText> MagicText { get; set; }
+    }
+
+    public class MagicText
+    {
+        public MagicText()
+        {
+            Font = new Font();
+        }
+        public Font Font { get; set; }
+    }
+
+
     public class Page
     {
         public Page()
         {
             Layout = new Layout();
-            Font = new Font();
+            Paragraphs = new Dictionary<string, Paragraph>();
         }
         public Layout Layout { get; set; }
-        public Font Font { get; set; }
+        public Dictionary<string, Paragraph> Paragraphs { get; set; }
     }
 
     public class Font
