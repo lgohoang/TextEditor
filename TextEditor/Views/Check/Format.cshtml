@@ -3,223 +3,100 @@
     ViewBag.Title = "Format";
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">File</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
+<h1>Cover Format</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">File</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
 
-                            <form id="from-upload">
-                                <input type="file" name="UploadFile" id="txtUploadFile" class="homereportupload" accept="application/pdf,application/msword,
-                    application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
-                            </form>
+                                <form id="from-upload">
+                                    <input type="file" name="UploadFile" id="txtUploadFile" class="homereportupload" accept="application/pdf,application/msword,
+                        application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                                </form>
 
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <button class="btn btn-default" type="button">Upload</button>
+                            <button class="btn btn-default" type="button">Check</button>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <button class="btn btn-default" type="button">Upload</button>
-                        <button class="btn btn-default" type="button">Check</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Định dạng trang</h3>
+                </div>
+                <div id="auto_control_page" class="panel-body row">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Trang bìa</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Cỡ chữ</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="auto_control_font_size" class="row">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Font Chữ</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="auto_control_font" class="row">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Định dạng trang</h3>
-            </div>
-            <div class="panel-body row">
-                <div class="col-md-2">
-                    <span class="control-label">Lề trái</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="page_layout_margin_left_file">N/A</span>
-                        <input id="page_layout_margin_left" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Lề phải</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="page_layout_margin_right_file">N/A</span>
-                        <input id="page_layout_margin_right" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
 
-                <div class="col-md-2">
-                    <span class="control-label">Lề trên</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="page_layout_margin_top_file">N/A</span>
-                        <input id="page_layout_margin_top" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
 
-                <div class="col-md-2">
-                    <span class="control-label">Lề dưới</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="page_layout_margin_bottom_file">N/A</span>
-                        <input id="page_layout_margin_bottom" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
 
-                <div class="col-md-2">
-                    <span class="control-label">Kiểu giấy</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="page_layout_size_paper_type_file">N/A</span>
-                        <input id="page_layout_size_paper_type" type="text" class="form-control" placeholder="EX: A4">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Lề trái</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">N/A</span>
-                        <input id="page_layout_margin_leftxxx" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Trang bìa</h3>
-            </div>
-            <div class="panel-body row">
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ tiêu đề</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ chuyên ngành</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ tên trường</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ họ tên</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ khóa</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ hệ đào tạo</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ tên đề tài</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Cỡ chữ năm</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_size_title_file">N/A</span>
-                        <input id="cover_layout_font_size_title" type="text" class="form-control" placeholder="Point (pt)">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <span class="control-label">Font chữ</span>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="cover_layout_font_family_file">N/A</span>
-                        <input id="cover_layout_font_family" type="text" class="form-control" placeholder="Ex: Arial">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Tên các chương</h3>
-            </div>
-            <div class="panel-body row">
-                <div class="input-group col-md-3">
-                    <span class="control-label">Cỡ chữ</span>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="input-group col-md-3">
-                    <span class="control-label">Font chữ</span>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Định dạng text trong các chương</h3>
-            </div>
-            <div class="panel-body row">
-                <div class="input-group col-md-3">
-                    <span class="control-label">Cỡ chữ</span>
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts
 {
     <script>
 
         $(document).ready(function () {
+
+
+            RenderControls();
+
+
             $('#txtUploadFile').on('change', function (e) {
                 var files = e.target.files;
                 if (files.length > 0) {
-                    if (this.value.lastIndexOf('.docx') === -1) {
-                        if (this.value.lastIndexOf('.doc') === -1) {
-                            alert('Only docx, doc files are allowed!');
-                            this.value = '';
-                            return;
-                        }
-                    }
                     if (window.FormData !== undefined) {
                         var data = new FormData();
                         for (var x = 0; x < files.length; x++) {
                             data.append("file" + x, files[x]);
                         }
-
                         $.ajax({
                             type: "POST",
                             url: '/api/process/upload',
@@ -245,25 +122,116 @@
             });
         });
 
-        function Check(obj) {
-            SetColorIfFail("page_layout_margin_top", obj.Page.Layout.Margin.Top);
-            SetColorIfFail("page_layout_margin_bottom", obj.Page.Layout.Margin.Bottom);
-            SetColorIfFail("page_layout_margin_left", obj.Page.Layout.Margin.Left);
-            SetColorIfFail("page_layout_margin_right", obj.Page.Layout.Margin.Right);
-            SetColorIfFail("page_layout_size_paper_type", obj.Page.Layout.Size.PaperType);
+        var cover_col = ["tieude", "tentruong", "hoten", "khoa", "he", "nganh", "detai", "nam"];
+        var cover_col_title = ["Tiêu đề", "Trường", "Họ tên", "Khóa", "Hệ", "Ngành", "Đề tài", "Năm"];
+        var page_col = ["Left", "Right", "Top", "Bottom", "PaperType"];
+        var page_col_title = ["Lề trái", "Lề phải", "Lề trên", "Lề dưới", "Khổ giấy"];
+
+        function RenderControls() {
+            for (var i = 0; i < page_col.length; i++){
+                RenderPage(page_col[i], page_col_title[i], "auto_control_page");
+            }
+
+            
+
+            for (var i = 0; i < cover_col.length; i++) {
+                RenderCoverFontSize(cover_col[i], cover_col_title[i], "auto_control_font_size")
+                RenderCoverFont(cover_col[i], cover_col_title[i], "auto_control_font");
+            }
+        }
+
+        function RenderCoverFontSize(name, title, id) {
+            var obj = document.getElementById(id);
+            var abc = "<div class=\"col-md-4\"><span class=\"control-label\" >" + title + "</span ><div class=\"input-group\"><span class=\"input-group-addon\" id=\"cover_layout_" + name + "_font_size_output\">N/A</span><input id=\"cover_layout_" + name + "_font_size_input\" type=\"text\" class=\"form-control\" placeholder=\"Point (pt)\"></div></div>";
+            obj.innerHTML += abc;
+        }
+
+        function RenderCoverFont(name,title, id) {
+            var obj = document.getElementById(id);
+            
+            var abc = "<div class=\"col-md-4\" style=\"margin-top: 10px;\">";
+            abc += "<span class=\"control-label\">" + title ;
+            abc += "</span>";
+            abc += "<div class=\"input-group\">";
+            abc += "<span class=\"input-group-addon\" id=\"cover_layout_" + name + "_font_family_output\">N/A";
+            abc += "</span>";
+            abc += "<input id=\"cover_layout_" + name + "_font_family_input\" type=\"text\" class=\"form-control\" placeholder=\"Point (pt)\">";
+            abc += "</div>";
+            abc += "<div class=\"form-inline\">";
+            abc += "<div class=\"checkbox\">";
+            abc += "<label>";
+            abc += "<input id=\"cover_layout_" + name + "_font_bold_checkbox\" type=\"checkbox\">Bold";
+            abc += "</label>";
+            abc += "</div>";
+            abc += "<div class=\"checkbox\" style=\"margin-left:10px;\">";
+            abc += "<label>";
+            abc += "<input id=\"cover_layout_" + name + "_font_italic_checkbox\" type=\"checkbox\">Italic";
+            abc += "</label>";
+            abc += "</div>";
+            abc += "</div>";
+            abc += "</div>";
+
+            obj.innerHTML += abc;
+        }
+
+        function RenderPage(name, title, id) {
+            var obj = document.getElementById(id);
+            var abc = "<div class=\"col-md-4\"><span class=\"control-label\" >" + title + "</span ><div class=\"input-group\"><span class=\"input-group-addon\" id=\"page_layout_" + name + "_output\">N/A</span><input id=\"page_layout_" + name + "_input\" type=\"text\" class=\"form-control\" placeholder=\"\"></div></div>";
+            obj.innerHTML += abc;
+        }
+
+
+        function Check(obj){;
+            for (var i = 0; i < page_col.length; i++) {
+                if (page_col[i] == "PaperType") {
+                    SetColorIfFail("page_layout_" + page_col[i], eval("obj.Page.Layout.Size." + page_col[i]));
+                } else {
+                    SetColorIfFail("page_layout_" + page_col[i], eval("obj.Page.Layout.Margin." + page_col[i]));
+                }
+            }
+
+            for (var c in cover_col) {
+                var paragraphs = obj.Cover.Paragraphs;
+                var cover = cover_col[c];
+                for (var k in paragraphs) {
+                    var p = paragraphs[k];
+                    if (cover == p.Key) {
+                        console.log(p.Value);
+                        var mt = p.Value.MagicText;
+                        for (var m in mt) {
+                            var format = mt[m].Value;
+                            console.log(format);
+                            SetColorIfFail("cover_layout_" + cover + "_font_size", format.Font.Size);
+                            SetColorIfFail("cover_layout_" + cover + "_font_family", format.Font.Family);
+                            SetColorIfFailCheckBox("cover_layout_" + cover + "_font_bold_checkbox", format.Font.Bold);
+                        }
+                    }
+                }
+            }
+        }
+
+        function SetColorIfFailCheckBox(id, value) {
+            var obj = document.getElementById(id);
+            var c = obj.checked ? true : false;
+            if (c == value) {
+                console.log("true");
+                obj.style.backgroundColor = "#FF0000";
+            }
+            else {
+                console.log("false");
+                obj.style.backgroundColor = "#0c829d";
+            }
         }
 
         function SetColorIfFail(id, value) {
-            var obj = document.getElementById(id);
-            var obj_file = document.getElementById(id + "_file");
+            var obj = document.getElementById(id+"_input");
+            var obj_file = document.getElementById(id + "_output");
             obj_file.innerHTML = value;
 
             if (obj.value == value) {
-                console.log("true");
                 obj.style.borderColor = "#0c829d";
             } else {
                 obj.style.borderColor = "#FF0000";
-                console.log("false");
             }
         }
 

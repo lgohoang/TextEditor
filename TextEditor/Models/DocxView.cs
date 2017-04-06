@@ -53,6 +53,8 @@ namespace TextEditor.Models
     {
         public float Size { get; set; }
         public string Family { get; set; }
+        public bool Bold { get; set; }
+        public bool Italic { get; set; }
     }
 
     public class Margin

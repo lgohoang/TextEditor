@@ -143,30 +143,30 @@ namespace TextEditor.Controllers
             var runProperties = new RunProperties();
             var fontname = "Calibri";
             var fontSize = "18";
-            try
-            {
+            //try
+            //{
                 fontname =
                     paragraph.GetFirstChild<ParagraphProperties>()
                              .GetFirstChild<ParagraphMarkRunProperties>()
                              .GetFirstChild<RunFonts>()
                              .Ascii;
-            }
-            catch
-            {
+            //}
+            //catch
+            //{
 
-            }
-            try
-            {
+            //}
+            //try
+            //{
                 fontSize =
                     paragraph.GetFirstChild<ParagraphProperties>()
                              .GetFirstChild<ParagraphMarkRunProperties>()
                              .GetFirstChild<FontSize>()
                              .Val;
-            }
-            catch
-            {
+            //}
+            //catch
+            //{
 
-            }
+            //}
             runProperties.AppendChild(new RunFonts() { Ascii = fontname });
             runProperties.AppendChild(new FontSize() { Val = fontSize });
             return runProperties;
@@ -185,8 +185,8 @@ namespace TextEditor.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "The request doesn't contain valid content!");
             }
 
-            try
-            {
+            //try
+            //{
                 var provider = new MultipartMemoryStreamProvider();
                 await Request.Content.ReadAsMultipartAsync(provider);
                 foreach (var file in provider.Contents)
@@ -248,24 +248,27 @@ namespace TextEditor.Controllers
 
                     }
 
-                    foreach (var info in paragraphInfos)
-                    {
-                        var attri = info.Paragraph;
-                        var font = GetRunPropertyFromParagraph(info.Paragraph);
+                    //foreach (var info in paragraphInfos)
+                    //{
+                    //    var attri = info.Paragraph;
 
 
-                        Debug.WriteLine("Page {0}/{1} - {2} : '{3}'", info.PageNumber, pageIdx, (int.Parse(font.FontSize.Val) / 2), attri.InnerText);
-                    }
+                    //    Debug.WriteLine("Page {0}/{1} : '{3}'", info.PageNumber, pageIdx, attri.InnerText);
+                    //}
 
-                    view.Cover.Paragraphs["hocvien"] = GetParagraph(paragraphInfos, docx, 1);
-                    view.Cover.Paragraphs["baocaomonhoc"] = GetParagraph(paragraphInfos, docx, 3);
-                    view.Cover.Paragraphs["phuongphapnghiencuuit"] = GetParagraph(paragraphInfos, docx, 4);
-                    view.Cover.Paragraphs["baocaomonhoc"] = GetParagraph(paragraphInfos, docx, 3);
+                    view.Cover.Paragraphs["tentruong"] = GetParagraph(paragraphInfos, docx, 0);
+                    view.Cover.Paragraphs["hoten"] = GetParagraph(paragraphInfos, docx, 1);
+                    view.Cover.Paragraphs["khoa"] = GetParagraph(paragraphInfos, docx, 2);
+                    view.Cover.Paragraphs["he"] = GetParagraph(paragraphInfos, docx, 3);
+                    view.Cover.Paragraphs["tieude"] = GetParagraph(paragraphInfos, docx, 4);
+                    view.Cover.Paragraphs["nganh"] = GetParagraph(paragraphInfos, docx, 5);
+                    view.Cover.Paragraphs["detai"] = GetParagraph(paragraphInfos, docx, 6);
+                    view.Cover.Paragraphs["nam"] = GetParagraph(paragraphInfos, docx, 7);
 
 
 
 
-                    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
                     ser.WriteObject(ms, view);
                     string json = Encoding.Default.GetString(ms.ToArray());
                     var response = Request.CreateResponse(HttpStatusCode.OK);
@@ -274,11 +277,11 @@ namespace TextEditor.Controllers
                     return response;
                     
                 }
-            }
-            catch (Exception e)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            //}
             return null;
         }
 
@@ -289,7 +292,7 @@ namespace TextEditor.Controllers
             var p2 = Paragraph(docx, p.InnerText);
             if (p2 != null)
             {
-                return Views(p2);
+                return Views(p2, p);
             }
             return null;
 
@@ -307,7 +310,7 @@ namespace TextEditor.Controllers
             return null;
         }
 
-        public Models.Paragraph Views(Novacode.Paragraph p)
+        public Models.Paragraph Views(Novacode.Paragraph p, DocumentFormat.OpenXml.Wordprocessing.Paragraph p2)
         {
             var par = new Models.Paragraph();
 
@@ -316,9 +319,27 @@ namespace TextEditor.Controllers
 
             foreach(var m in p.MagicText)
             {
+
+
                 var mt = new MagicText();
-                mt.Font.Family = m.formatting.FontFamily.Name;
-                mt.Font.Size = (float)m.formatting.Size;
+
+                if(m.formatting.FontFamily != null)
+                {
+                    mt.Font.Family = m.formatting.FontFamily.Name;
+                }
+                if(m.formatting.Size != null)
+                {
+                    mt.Font.Size = (float)m.formatting.Size;
+                }
+                if(m.formatting.Bold != null)
+                {
+                    mt.Font.Bold = m.formatting.Bold.Value;
+                }
+                if (m.formatting.Italic != null)
+                {
+                    mt.Font.Italic = m.formatting.Italic.Value;
+                }
+
                 par.MagicText[m.text] = mt;
             }
 
