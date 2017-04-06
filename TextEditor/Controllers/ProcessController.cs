@@ -138,55 +138,17 @@ namespace TextEditor.Controllers
             public int PageNumber { get; set; }
         }
 
-        private RunProperties GetRunPropertyFromParagraph(DocumentFormat.OpenXml.Wordprocessing.Paragraph paragraph)
-        {
-            var runProperties = new RunProperties();
-            var fontname = "Calibri";
-            var fontSize = "18";
-            //try
-            //{
-                fontname =
-                    paragraph.GetFirstChild<ParagraphProperties>()
-                             .GetFirstChild<ParagraphMarkRunProperties>()
-                             .GetFirstChild<RunFonts>()
-                             .Ascii;
-            //}
-            //catch
-            //{
-
-            //}
-            //try
-            //{
-                fontSize =
-                    paragraph.GetFirstChild<ParagraphProperties>()
-                             .GetFirstChild<ParagraphMarkRunProperties>()
-                             .GetFirstChild<FontSize>()
-                             .Val;
-            //}
-            //catch
-            //{
-
-            //}
-            runProperties.AppendChild(new RunFonts() { Ascii = fontname });
-            runProperties.AppendChild(new FontSize() { Val = fontSize });
-            return runProperties;
-        }
-
-
-
-
-
         [HttpPost]
-        [Route("upload")]
-        public async Task<HttpResponseMessage> UploadFile()
+        [Route("cover")]
+        public async Task<HttpResponseMessage> Cover()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
                 return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "The request doesn't contain valid content!");
             }
 
-            //try
-            //{
+            try
+            {
                 var provider = new MultipartMemoryStreamProvider();
                 await Request.Content.ReadAsMultipartAsync(provider);
                 foreach (var file in provider.Contents)
@@ -195,97 +157,160 @@ namespace TextEditor.Controllers
                     // use the data stream to persist the data to the server (file system etc)
                     Stream stream = new MemoryStream(dataStream);
 
-                    var docx = DocX.Load(stream);
-                    WordprocessingDocument doc = WordprocessingDocument.Open(stream, false);
+                    var dict = new Dictionary<string, int>();
+                    dict.Add("tentruong", 0);
+                    dict.Add("hoten", 1);
+                    dict.Add("khoa", 2);
+                    dict.Add("he", 3);
+                    dict.Add("tieude", 4);
+                    dict.Add("nganh", 5);
+                    dict.Add("detai", 6);
+                    dict.Add("nam", 7);
 
-                    var convert = new Extends.Library.Convert();
-                    var view = new DocxView();
-                    var ml = convert.PaperClipsToCentimeters(docx.MarginLeft);
                     MemoryStream ms = new MemoryStream();
-                    var paragraphInfos = new List<ParagraphInfo>();
-
-                    view.Page.Layout.Margin.Top = docx.MarginTop;
-                    view.Page.Layout.Margin.Bottom = docx.MarginBottom;
-                    view.Page.Layout.Margin.Left = docx.MarginLeft;
-                    view.Page.Layout.Margin.Right = docx.MarginRight;
-                    view.Page.Layout.Size.Width = docx.PageWidth;
-                    view.Page.Layout.Size.Height = docx.PageHeight;
-                    var pps = new Models.PaperSize();
-                    view.Page.Layout.Size.PaperType = pps.PaperType(view.Page.Layout.Size);
-
-
-                    var paragraphs = doc.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Paragraph>();
-                    int pageIdx = 1;
-                    foreach (var paragraph in paragraphs)
-                    {
-                        var run = paragraph.GetFirstChild<DocumentFormat.OpenXml.Wordprocessing.Run>();
-                        var info = new ParagraphInfo
-                        {
-                            Paragraph = paragraph,
-                            PageNumber = pageIdx
-                        };
-
-                        if (!paragraph.InnerText.Trim().Equals(""))
-                        {
-                            paragraphInfos.Add(info);
-                        }
-                        
-                        
-                        if (run != null)
-                        {
-                            var lastRenderedPageBreak = run.GetFirstChild<LastRenderedPageBreak>();
-                            var pageBreak = run.GetFirstChild<Break>();
-                            var bookmarkStart = run.GetFirstChild<BookmarkStart>();
-
-
-                            if (lastRenderedPageBreak != null || pageBreak != null)
-                            {
-                                pageIdx++;
-                            }
-                        }
-
-                        
-
-                    }
-
-                    //foreach (var info in paragraphInfos)
-                    //{
-                    //    var attri = info.Paragraph;
-
-
-                    //    Debug.WriteLine("Page {0}/{1} : '{3}'", info.PageNumber, pageIdx, attri.InnerText);
-                    //}
-
-                    view.Cover.Paragraphs["tentruong"] = GetParagraph(paragraphInfos, docx, 0);
-                    view.Cover.Paragraphs["hoten"] = GetParagraph(paragraphInfos, docx, 1);
-                    view.Cover.Paragraphs["khoa"] = GetParagraph(paragraphInfos, docx, 2);
-                    view.Cover.Paragraphs["he"] = GetParagraph(paragraphInfos, docx, 3);
-                    view.Cover.Paragraphs["tieude"] = GetParagraph(paragraphInfos, docx, 4);
-                    view.Cover.Paragraphs["nganh"] = GetParagraph(paragraphInfos, docx, 5);
-                    view.Cover.Paragraphs["detai"] = GetParagraph(paragraphInfos, docx, 6);
-                    view.Cover.Paragraphs["nam"] = GetParagraph(paragraphInfos, docx, 7);
+                    DocxView view = GenResult(stream, dict);
 
 
 
 
-                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
+                    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
                     ser.WriteObject(ms, view);
                     string json = Encoding.Default.GetString(ms.ToArray());
                     var response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(json, Encoding.UTF8, "text/plain");
                     response.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue(@"text/html");
                     return response;
-                    
+
                 }
-            //}
-            //catch (Exception e)
-            //{
-            //    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
-            //}
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
             return null;
         }
 
-        public Models.Paragraph GetParagraph(List<ParagraphInfo> pinfo,DocX docx, int index)
+        [HttpPost]
+        [Route("sidecover")]
+        public async Task<HttpResponseMessage> SideCover()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.UnsupportedMediaType, "The request doesn't contain valid content!");
+            }
+
+            try
+            {
+                var provider = new MultipartMemoryStreamProvider();
+                await Request.Content.ReadAsMultipartAsync(provider);
+                foreach (var file in provider.Contents)
+                {
+                    var dataStream = await file.ReadAsByteArrayAsync();
+                    // use the data stream to persist the data to the server (file system etc)
+                    Stream stream = new MemoryStream(dataStream);
+
+                    var dict = new Dictionary<string, int>();
+                    dict.Add("tentruong", 0);
+                    dict.Add("hoten", 1);
+                    dict.Add("khoa", 2);
+                    dict.Add("he", 3);
+                    dict.Add("tieude", 4);
+                    dict.Add("nganh", 5);
+                    dict.Add("maso", 6);
+                    dict.Add("detai", 7);
+                    dict.Add("gvhd", 8);
+                    dict.Add("nam", 9);
+
+                    MemoryStream ms = new MemoryStream();
+                    DocxView view = GenResult(stream, dict);
+
+
+
+
+                    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DocxView));
+                    ser.WriteObject(ms, view);
+                    string json = Encoding.Default.GetString(ms.ToArray());
+                    var response = Request.CreateResponse(HttpStatusCode.OK);
+                    response.Content = new StringContent(json, Encoding.UTF8, "text/plain");
+                    response.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue(@"text/html");
+                    return response;
+
+                }
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+            return null;
+        }
+
+        public DocxView GenResult(Stream stream, Dictionary<string,int> col)
+        {
+            var view = new DocxView();
+            var docx = DocX.Load(stream);
+            WordprocessingDocument doc = WordprocessingDocument.Open(stream, false);
+            var convert = new Extends.Library.Convert();
+            var ml = convert.PaperClipsToCentimeters(docx.MarginLeft);
+            var paragraphInfos = new List<ParagraphInfo>();
+            view.Page.Layout.Margin.Top = docx.MarginTop;
+            view.Page.Layout.Margin.Bottom = docx.MarginBottom;
+            view.Page.Layout.Margin.Left = docx.MarginLeft;
+            view.Page.Layout.Margin.Right = docx.MarginRight;
+            view.Page.Layout.Size.Width = docx.PageWidth;
+            view.Page.Layout.Size.Height = docx.PageHeight;
+            var pps = new Models.PaperSize();
+            view.Page.Layout.Size.PaperType = pps.PaperType(view.Page.Layout.Size);
+
+            var paragraphs = doc.MainDocumentPart.Document.Descendants<DocumentFormat.OpenXml.Wordprocessing.Paragraph>();
+            int pageIdx = 1;
+            foreach (var paragraph in paragraphs)
+            {
+                var run = paragraph.GetFirstChild<DocumentFormat.OpenXml.Wordprocessing.Run>();
+                var info = new ParagraphInfo
+                {
+                    Paragraph = paragraph,
+                    PageNumber = pageIdx
+                };
+
+                if (!paragraph.InnerText.Trim().Equals(""))
+                {
+                    paragraphInfos.Add(info);
+                }
+
+
+                if (run != null)
+                {
+                    var lastRenderedPageBreak = run.GetFirstChild<LastRenderedPageBreak>();
+                    var pageBreak = run.GetFirstChild<Break>();
+
+
+                    if (lastRenderedPageBreak != null || pageBreak != null)
+                    {
+                        pageIdx++;
+                    }
+                }
+
+
+
+            }
+
+            foreach(var c in col)
+            {
+                view.Cover.Paragraphs[c.Key] = GetParagraph(paragraphInfos, docx, c.Value);
+            }
+
+            return view;
+            //view.Cover.Paragraphs["tentruong"] = GetParagraph(paragraphInfos, docx, 0);
+            //view.Cover.Paragraphs["hoten"] = GetParagraph(paragraphInfos, docx, 1);
+            //view.Cover.Paragraphs["khoa"] = GetParagraph(paragraphInfos, docx, 2);
+            //view.Cover.Paragraphs["he"] = GetParagraph(paragraphInfos, docx, 3);
+            //view.Cover.Paragraphs["tieude"] = GetParagraph(paragraphInfos, docx, 4);
+            //view.Cover.Paragraphs["nganh"] = GetParagraph(paragraphInfos, docx, 5);
+            //view.Cover.Paragraphs["detai"] = GetParagraph(paragraphInfos, docx, 6);
+            //view.Cover.Paragraphs["nam"] = GetParagraph(paragraphInfos, docx, 7);
+        }
+
+        public Models.Paragraph GetParagraph(List<ParagraphInfo> pinfo, DocX docx, int index)
         {
             var p = pinfo[index].Paragraph;
 
@@ -298,9 +323,9 @@ namespace TextEditor.Controllers
 
         }
 
-        public Novacode.Paragraph Paragraph(DocX docx,string text)
+        public Novacode.Paragraph Paragraph(DocX docx, string text)
         {
-            foreach(var p in docx.Paragraphs)
+            foreach (var p in docx.Paragraphs)
             {
                 if (p.Text.Equals(text))
                 {
@@ -317,21 +342,21 @@ namespace TextEditor.Controllers
             par.Alignment = p.Alignment.ToString();
             par.Text = p.Text;
 
-            foreach(var m in p.MagicText)
+            foreach (var m in p.MagicText)
             {
 
 
                 var mt = new MagicText();
 
-                if(m.formatting.FontFamily != null)
+                if (m.formatting.FontFamily != null)
                 {
                     mt.Font.Family = m.formatting.FontFamily.Name;
                 }
-                if(m.formatting.Size != null)
+                if (m.formatting.Size != null)
                 {
                     mt.Font.Size = (float)m.formatting.Size;
                 }
-                if(m.formatting.Bold != null)
+                if (m.formatting.Bold != null)
                 {
                     mt.Font.Bold = m.formatting.Bold.Value;
                 }

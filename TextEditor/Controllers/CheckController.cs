@@ -14,6 +14,16 @@ namespace TextEditor.Controllers
             return View();
         }
 
+        public ActionResult Cover()
+        {
+            return View();
+        }
+
+        public ActionResult SideCover()
+        {
+            return View();
+        }
+
         public ActionResult Format()
         {
             return View();

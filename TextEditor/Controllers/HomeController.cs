@@ -13,16 +13,8 @@ namespace TextEditor.Controllers
 
         public ActionResult Index()
         {
-            var db = new ApplicationDbContext();
 
-            var result = (from u in db.Users
-                          select new
-                          {
-                              id = u.Id
-                          }).ToList();
-            
-
-            return View(result);
+            return View();
         }
 
         public ActionResult Del(int id)

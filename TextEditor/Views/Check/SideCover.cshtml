@@ -3,7 +3,7 @@
     ViewBag.Title = "Format";
 }
 
-<h1>Cover Format</h1>
+<h1>Side Cover Format</h1>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -21,10 +21,6 @@
                                 </form>
 
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <button class="btn btn-default" type="button">Upload</button>
-                            <button class="btn btn-default" type="button">Check</button>
                         </div>
                     </div>
                 </div>
@@ -99,7 +95,7 @@
                         }
                         $.ajax({
                             type: "POST",
-                            url: '/api/process/upload',
+                            url: '/api/process/sidecover',
                             contentType: false,
                             processData: false,
                             data: data,
@@ -113,6 +109,8 @@
                                 if (xhr.responseText && xhr.responseText[0] == "{")
                                     err = JSON.parse(xhr.responseText).Message;
                                 console.log(err);
+
+                                window.alert("Sai định dạng \n" + err);
                             }
                         });
                     } else {
@@ -122,8 +120,8 @@
             });
         });
 
-        var cover_col = ["tieude", "tentruong", "hoten", "khoa", "he", "nganh", "detai", "nam"];
-        var cover_col_title = ["Tiêu đề", "Trường", "Họ tên", "Khóa", "Hệ", "Ngành", "Đề tài", "Năm"];
+        var cover_col = ["tieude", "tentruong", "hoten", "khoa", "he", "nganh", "detai", "nam", "maso", "gvhd"];
+        var cover_col_title = ["Tiêu đề", "Trường", "Họ tên", "Khóa", "Hệ", "Ngành", "Đề tài", "Năm", "Mã số", "Cán bộ hướng dẫn"];
         var page_col = ["Left", "Right", "Top", "Bottom", "PaperType"];
         var page_col_title = ["Lề trái", "Lề phải", "Lề trên", "Lề dưới", "Khổ giấy"];
 
