@@ -19,6 +19,15 @@ namespace TextEditor
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "TextEditor.Controllers" }
             );
+            routes.MapRoute(
+            name: "DeleteUser",
+            url: "Admin/Home/del/{product_id}",
+            defaults: new
+            {
+                controller = "Home",
+                action = "Del",
+                product_id = UrlParameter.Optional
+            }); 
         }
     }
 }
