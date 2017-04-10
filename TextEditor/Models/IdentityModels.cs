@@ -42,5 +42,7 @@ namespace TextEditor.Models
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         }
+
+        public DbSet<FileTable> FileTable { get; set; }
     }
 }
