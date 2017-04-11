@@ -88,6 +88,10 @@ namespace TextEditor.Models
 
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
+
+        [Display(Name = "Quyền")]
+        public string RoleID { get; set; }
+
     }
 
     public class ResetPasswordViewModel
