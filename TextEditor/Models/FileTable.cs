@@ -13,4 +13,19 @@ namespace TextEditor.Models
         public string Path { get; set; }
         public string Time { get; set; }
     }
+
+    public class FileTableUpload
+    {
+        public FileTableUpload()
+        {
+            Files = new List<HttpPostedFileBase>();
+        }
+        public string Name { get; set; }
+        public List<HttpPostedFileBase> Files { get; set; }
+    }
+    public class CrudFileTable
+    {
+        public List<FileTable> FiletableView { get; set; }
+        public FileTableUpload FileTableUpload { get; set; }
+    }
 }
