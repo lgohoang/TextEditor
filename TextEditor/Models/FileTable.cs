@@ -11,17 +11,13 @@ namespace TextEditor.Models
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
     }
 
     public class FileTableUpload
     {
-        public FileTableUpload()
-        {
-            Files = new List<HttpPostedFileBase>();
-        }
         public string Name { get; set; }
-        public List<HttpPostedFileBase> Files { get; set; }
+        public string Type { get; set; }
     }
     public class CrudFileTable
     {

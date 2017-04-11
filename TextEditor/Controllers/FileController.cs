@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using TextEditor.Models;
 using System.Net;
 using System.Net.Http;
+using Microsoft.AspNet.Identity;
 
 namespace TextEditor.Controllers
 {
@@ -24,20 +25,33 @@ namespace TextEditor.Controllers
             return View(model);
         }
 
+        const string path = "~/Upload";
+
         [HttpPost]
         public ActionResult Index(CrudFileTable cft, HttpPostedFileBase fileUpload)
         {
+            if (ModelState.IsValid)
+            {
+                var file = new FileTable();
+                file.Time = DateTime.Now;
+                file.Path = path;
+                file.UserId = User.Identity.GetUserId();
+                file.Name = file.Time.Year+file.Time.Month+file.Time.Day+file.Time.Hour+file.Time.Minute+file.Time.Second +"_"+ Path.GetFileName(fileUpload.FileName);
 
-                if(fileUpload.ContentLength != 0)
+                if (fileUpload.ContentLength != 0)
                 {
-                    string pathForSaving = Server.MapPath("~/Uploads");
+                    string pathForSaving = Server.MapPath(path);
                     if (CreateFolderIfNeeded(pathForSaving))
                     {
                         try
                         {
                             byte[] t = new byte[fileUpload.InputStream.Length];
                             fileUpload.InputStream.Read(t, 0, (int)fileUpload.InputStream.Length);
-                            WriteFile(Path.GetFileName(fileUpload.FileName), t);
+                            WriteFile(file.Path + "/" + file.Name, t);
+
+                            db.FileTable.Add(file);
+                            db.SaveChanges();
+
                         }
                         catch (Exception ex)
                         {
@@ -45,20 +59,19 @@ namespace TextEditor.Controllers
                         }
                     }
                 }
-            
-
-            return RedirectToAction("index");
+                return RedirectToAction("index");
+            }
+            return View(cft);
         }
 
         public static void WriteFile(string fileName, byte[] bytes)
         {
-            string path = "~/Upload/";
 
-            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(path + fileName)))
-                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(path + fileName));
+            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(fileName)))
+                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(fileName));
             try
             {
-                using (FileStream fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(path + fileName), FileMode.CreateNew, FileAccess.Write))
+                using (FileStream fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(fileName), FileMode.CreateNew, FileAccess.Write))
                 {
                     fs.Write(bytes, 0, bytes.Length);
                     fs.Close();
