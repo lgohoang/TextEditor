@@ -13,7 +13,7 @@ namespace TextEditor.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201703301308194_db"; }
+            get { return "201704101624004_db"; }
         }
         
         string IMigrationMetadata.Source
