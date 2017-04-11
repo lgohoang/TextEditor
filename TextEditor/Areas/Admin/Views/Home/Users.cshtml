@@ -21,6 +21,7 @@
                                 <th style="text-align:center"><em class="fa fa-cog"></em></th>
                                 <th>Họ tên</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Address</th>
                             </tr>
                         </thead>
@@ -29,12 +30,14 @@
                             {
                                 <tr>
                                     <td align="center">
-                                        <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                                        <a  class=" btn btn-danger" href="@Url.RouteUrl("DeleteUser", new { area="Admin", Controller = "Home", Action = "Del",  product_id=@user.Id })"><em class="fa fa-trash"></em></a>
-                                        @*<a class=" btn btn-danger" href="/admin/home/del?id=@user.id"><em class="fa fa-trash"></em></a>*@
+                                       
+                                        <a class=" btn btn-default" href="@Url.RouteUrl("EditUser", new { area="Admin", Controller = "Home", Action = "Edit",  id=@user.Id })"><em class="fa fa-pencil"></em></a>
+                                        <a  class=" btn btn-danger" href="@Url.RouteUrl("DeleteUser", new { area="Admin", Controller = "Home", Action = "Del",  id=@user.Id })"><em class="fa fa-trash"></em></a>
+                                        
                                     </td>
                                     <td>@user.FullName</td>
                                     <td>@user.Email</td>
+                                    <td>@user.PhoneNumber</td>
                                     <td>@user.Address</td>
                                 </tr>
                             }

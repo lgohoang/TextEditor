@@ -8,6 +8,18 @@ namespace TextEditor.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.FileTables",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(),
+                        Name = c.String(),
+                        Path = c.String(),
+                        Time = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Roles",
                 c => new
                     {
@@ -96,6 +108,7 @@ namespace TextEditor.Migrations
             DropTable("dbo.UserProfiles");
             DropTable("dbo.UserRoles");
             DropTable("dbo.Roles");
+            DropTable("dbo.FileTables");
         }
     }
 }

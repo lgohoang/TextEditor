@@ -21,13 +21,23 @@ namespace TextEditor
             );
             routes.MapRoute(
             name: "DeleteUser",
-            url: "Admin/Home/del/{product_id}",
+            url: "Admin/Home/del/{id}",
             defaults: new
             {
                 controller = "Home",
                 action = "Del",
                 product_id = UrlParameter.Optional
-            }); 
+            });
+            routes.MapRoute(
+          name: "EditUser",
+          url: "Admin/Home/Edit/{id}",
+          defaults: new
+          {
+              controller = "Home",
+              action = "Edit",
+              product_id = UrlParameter.Optional
+          });
+
         }
     }
 }
