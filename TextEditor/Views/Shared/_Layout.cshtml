@@ -15,7 +15,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top nav-hlm  ">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,9 +27,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Page Format", "Index", "PageFormat")</li>
                     <li>@Html.ActionLink("Page Properties Format", "Index", "PagePropertiesFormat")</li>
                     <li>@Html.ActionLink("Upload File", "Index", "File")</li>
