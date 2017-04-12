@@ -1,21 +1,11 @@
-﻿@model TextEditor.Models.FormatView
+﻿@model TextEditor.Models.Gramar
 
 @{
     ViewBag.Title = "Format";
-    string color = "black";
 }
 
-@if (!Model.Page.isOk)
-{
-    color = "red";
-}
-else
-{
-    color = "black";
-}
 
-<h5 style="margin-top:30px;">Paper Type: - File: @Model.Page.PaperType.FileValue - DB: @Model.Page.PaperType.DBValue </h5>
-<div class="row" style="border:solid 1px @color; padding: 50px 0;">
+<div class="row" style="border:solid 1px black; padding: 50px 0;">
     @Html.Raw(ViewBag.Html)
 </div>
 
@@ -26,9 +16,9 @@ else
 
         $(document).ready(function () {
 
-            @foreach(var e in Model.Properties)
+            @foreach(var e in Model.Error)
             {
-                @Html.Raw("ColorString(\"" + e.Key +"\"); \n");
+                @Html.Raw("ColorString(\"" + e +"\"); \n");
             }
         });
 
@@ -42,3 +32,4 @@ else
 
     </script>
 }
+
