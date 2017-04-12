@@ -11,6 +11,7 @@ namespace TextEditor.Models
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
+        public string Type { get; set; }
         public DateTime Time { get; set; }
     }
 
