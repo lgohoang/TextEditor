@@ -1,5 +1,5 @@
 ﻿@model TextEditor.Models.CrudFileTable
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
 
@@ -7,11 +7,13 @@
     type.Add(new SelectListItem { Text = "Cover", Value = "Cover" });
     type.Add(new SelectListItem { Text = "Side Cover", Value = "SCover" });
     type.Add(new SelectListItem { Text = "Normal", Value = "Normal" });
+
+
 }
 
-<h2>Index</h2>
+<h1>File của @User.Identity.GetUserName()</h1>
 
-<div class="row">
+<div class="row" style="margin-top:20px;">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -45,9 +47,6 @@
 <table class="table">
     <tr>
         <th>
-            Id
-        </th>
-        <th>
             Name
         </th>
         <th>
@@ -64,9 +63,6 @@
 @foreach (var item in Model.FiletableView) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
             <a href="Upload/@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
         </td>
         <td>
@@ -76,10 +72,9 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }) |
             @Html.ActionLink("Check", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Check Gramar","CheckGramar", new { id = @item.Id})
+            @Html.ActionLink("Check Gramar","CheckGramar", new { id = @item.Id}) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
