@@ -26,6 +26,14 @@ namespace TextEditor.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //context.PageFormat.AddOrUpdate(
+            //        p => p.Id,
+            //        new Models.PageFormat {Id = 1, Name = "Cover", PaperType = "A4"},
+            //        new Models.PageFormat { Id = 2, Name = "Side Cover", PaperType = "A4" },
+            //        new Models.PageFormat { Id = 3, Name = "Normal", PaperType = "A4" }
+
+            //    );
         }
     }
 }

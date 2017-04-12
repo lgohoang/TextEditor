@@ -44,5 +44,7 @@ namespace TextEditor.Models
         }
 
         public DbSet<FileTable> FileTable { get; set; }
+        public DbSet<PageFormat> PageFormat { get; set; }
+        public DbSet<PagePropertiesFormat> PagePropertiesFormat { get; set; }
     }
 }

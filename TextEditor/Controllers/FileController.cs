@@ -10,6 +10,8 @@ using System.Net.Http;
 using Microsoft.AspNet.Identity;
 using Novacode;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
+using TextEditor.Controllers;
 
 namespace TextEditor.Controllers
 {
@@ -18,6 +20,8 @@ namespace TextEditor.Controllers
     {
 
         ApplicationDbContext db = new ApplicationDbContext();
+        PagePropertiesFormatController ppf = new PagePropertiesFormatController();
+
 
         // GET: File
         public ActionResult Index()
@@ -27,6 +31,9 @@ namespace TextEditor.Controllers
             var filetable = (from f in db.FileTable
                              where f.UserId == userId
                              select f).ToList();
+
+
+            ViewBag.PageFormatList = ppf.PageFormatList();
 
             var model = new CrudFileTable();
             model.FiletableView = filetable;
@@ -45,7 +52,7 @@ namespace TextEditor.Controllers
                 file.Path = path;
                 file.UserId = User.Identity.GetUserId();
                 file.Name = file.Time.Year+file.Time.Month+file.Time.Day+file.Time.Hour+file.Time.Minute+file.Time.Second +"_"+ Path.GetFileName(fileUpload.FileName);
-                file.Type = cft.FileTableUpload.Type;
+                file.PageId = cft.FileTableUpload.PageId;
 
                 if (fileUpload.ContentLength != 0)
                 {

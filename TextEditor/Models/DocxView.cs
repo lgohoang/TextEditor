@@ -98,4 +98,9 @@ namespace TextEditor.Models
             return "letter";
         }
     }
+
+    public class FormatView
+    {
+        public bool isOk { get; set; }
+    }
 }

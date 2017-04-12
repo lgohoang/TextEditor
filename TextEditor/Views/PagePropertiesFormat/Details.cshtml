@@ -1,0 +1,66 @@
+﻿@model TextEditor.Models.PagePropertiesFormat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PagePropertiesFormat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PageId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Row)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Row)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Italic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Italic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

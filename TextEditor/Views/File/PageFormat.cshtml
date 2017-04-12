@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TextEditor.Models.PageFormat>
+
+@{
+    ViewBag.Title = "PageFormat";
+}
+
+<h2>Page Format</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PageType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarginLeft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarginRight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarginTop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MarginBottom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaperType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FontFamily)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarginLeft)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarginRight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarginTop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarginBottom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaperType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FontFamily)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "PageFormatEdit", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
