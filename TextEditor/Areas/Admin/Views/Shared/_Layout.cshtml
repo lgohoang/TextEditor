@@ -1,45 +1,57 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
     @*@Html.ActionLink("Application name", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })*@
 </head>
 <body>
 
-    <div class="navbar navbar-inverse nar-menu-top">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/Admin/Home/index"><span>ADMIN</span></a>
-        </div>
-      
-        
-        <div class="navbar-collapse collapse" id="navbar-mobile">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Quản lý user", "Users", "Home", new { area = "Admin" }, new { @class = "navbar-brand nav-admin" })</li>
-                <li>@Html.ActionLink("Check format", "Format", "Check", new { area = "" }, new { @class = "nav navbar-brand" })</li>
-                <li>@Html.ActionLink("Lịch sử", "History", "History", new { area = "Amin" }, new { @class = "navbar-brand" })</li>
-            </ul>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.RouteUrl("default", new { area="", Controller = "Home", Action = "index"})"><span>Home</span></a>
+            </div>
+
+
+            <div class="navbar-collapse collapse" id="navbar-mobile">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
+                    <li>@Html.ActionLink("Quản lý user", "Users", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
+                    <li>@Html.ActionLink("Check format", "Format", "Check", new { area = "" }, new { @class = "nav navbar-nav" })</li>
+                    <li>@Html.ActionLink("Lịch sử", "History", "History", new { area = "Amin" }, new { @class = "navbar-nav" })</li>
+                </ul>
+                @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                    @Html.AntiForgeryToken()
             <!--<p class="navbar-text"><span class="label bg-success-400">Online</span></p>-->
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown dropdown-user">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span>Nguyễn Tuấn Anh</span>
-                        <i class="caret"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#"><i class="icon-user-plus"></i> Thông tin cá nhân</a></li>
-                        <li><a href="#"><i class="icon-lock2"></i> Đổi mật khẩu</a></li>
-                        <li><a href="#"><i class="icon-switch2"></i> Đăng Xuất</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown dropdown-user">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                <span>@User.Identity.GetUserName()</span>
+                                <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                @*<li><a href="#"><i class="icon-user-plus"></i> Thông tin cá nhân</a></li>
+                                <li><a href="#"><i class="icon-lock2"></i> Đổi mật khẩu</a></li>*@
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-switch2"></i>Log off</a></li>
+
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
+                }
+            </div>
         </div>
    </div>
     <!-- /main navbar -->
@@ -74,3 +86,6 @@
 </body>
 
 </html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

@@ -9,7 +9,6 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.AspNet.Identity;
 using Novacode;
-using VnToolkit;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
 using TextEditor.Controllers;
