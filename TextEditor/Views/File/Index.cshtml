@@ -75,7 +75,7 @@
             @ppfc.GetPageFormatName(item.PageId)
         </td>
         <td>
-            @Html.ActionLink("Check", "Delete", new { id = item.Id }) |
+            <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
             @Html.ActionLink("Check Gramar","CheckGramar", new { id = @item.Id}) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>

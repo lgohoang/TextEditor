@@ -302,7 +302,6 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Check\Cover.cshtml" />
     <Content Include="Views\Check\SideCover.cshtml" />
-    <Content Include="Views\Check\Format.cshtml" />
     <Content Include="Views\File\Upload.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\Index - Copy.cshtml" />
@@ -324,6 +323,7 @@
     <Content Include="Views\Check - Copy\Cover.cshtml" />
     <Content Include="Views\Check - Copy\Format.cshtml" />
     <Content Include="Views\Check - Copy\SideCover.cshtml" />
+    <Content Include="Views\Check\Format.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
