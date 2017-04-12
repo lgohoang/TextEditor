@@ -17,7 +17,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PageId, htmlAttributes: new { @for = "PageId" })
+            @Html.LabelFor(model => model.PageId, htmlAttributes: new { @for = "PageId", @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.PageId, new SelectList(ViewBag.PageFormatList, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
                 @Html.ValidationMessageFor(model => model.PageId, "", new { @class = "text-danger" })

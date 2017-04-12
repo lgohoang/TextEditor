@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201704120822228_db1.Designer.cs">
       <DependentUpon>201704120822228_db1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704120900052_db2.cs" />
+    <Compile Include="Migrations\201704120900052_db2.Designer.cs">
+      <DependentUpon>201704120900052_db2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Compare.cs" />
@@ -317,6 +321,9 @@
     <Content Include="Views\PagePropertiesFormat\Details.cshtml" />
     <Content Include="Views\PagePropertiesFormat\Edit.cshtml" />
     <Content Include="Views\PagePropertiesFormat\Index.cshtml" />
+    <Content Include="Views\Check - Copy\Cover.cshtml" />
+    <Content Include="Views\Check - Copy\Format.cshtml" />
+    <Content Include="Views\Check - Copy\SideCover.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704120822228_db1.resx">
       <DependentUpon>201704120822228_db1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704120900052_db2.resx">
+      <DependentUpon>201704120900052_db2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TextEditor.Models;
 
 namespace TextEditor.Controllers
 {
+    [Authorize]
     public class CheckController : Controller
     {
-        // GET: Check
-        public ActionResult Index()
+        ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Check(int id)
         {
-            return View();
-        }
+            var file = db.FileTable.Find(id);
 
-        public ActionResult Cover()
-        {
+            var filter = (from ppf in db.PagePropertiesFormat
+                          where ppf.PageId == file.PageId
+                          orderby ppf.Row ascending
+                          select ppf).ToList();
+
+            
+
             return View();
         }
 

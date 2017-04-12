@@ -10,6 +10,7 @@ using TextEditor.Models;
 
 namespace TextEditor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PagePropertiesFormatController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -129,14 +130,24 @@ namespace TextEditor.Controllers
         public List<SelectListItem> PageFormatList()
         {
             var pageformat = from c in db.PageFormat
-                           select new SelectListItem
-                           {
-                               Text = c.Name,
-                               Value = c.Id.ToString()
-                           };
+                             select new SelectListItem
+                             {
+                                 Text = c.Name,
+                                 Value = c.Id.ToString()
+                             };
             List<SelectListItem> item = new List<SelectListItem>();
             item.AddRange(pageformat);
             return item;
+        }
+
+        public string GetPageFormatName(int? id)
+        {
+            if (id == null) return "Null";
+            var p = db.PageFormat.Find(id);
+            if (p == null)
+                return "Null";
+            else
+                return p.Name;
         }
     }
 }

@@ -10,6 +10,7 @@ using TextEditor.Models;
 
 namespace TextEditor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PageFormatController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

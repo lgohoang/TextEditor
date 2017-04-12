@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<TextEditor.Models.PagePropertiesFormat>
+@using TextEditor.Controllers
 
 @{
     ViewBag.Title = "Index";
+
+    PagePropertiesFormatController ppfc = new PagePropertiesFormatController();
+    
 }
 
 <h2>Index</h2>
@@ -35,7 +39,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PageId)
+            @ppfc.GetPageFormatName(item.PageId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Row)
