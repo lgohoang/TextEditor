@@ -13,3 +13,30 @@ else
     <h1>Định dạng khớp</h1>
 }
 
+<h5 style="margin-top:30px;">Paper Type: @ViewBag.Paper - Width: @ViewBag.Width point - Height: @ViewBag.Height point</h5>
+<div class="row" style="border:solid 1px black; padding: 50px 0;">
+    @Html.Raw(ViewBag.Html)
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            StringR(str);
+
+        });
+
+        var str = "HỌC VIỆN KỸ THUẬT QUÂN SỰ";
+        function StringR(str) {
+            $('span:contains(' + str + ')', document.body).each(function () {
+                $(this).html($(this).html().replace(
+                    new RegExp(yourstring, 'g'), '<span style="background:red;">' + yourstring + '</span>'
+                ));
+            }​);​
+        }
+        
+    </script>
+}

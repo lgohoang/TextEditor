@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TextEditor.Models;
+using OpenXmlPowerTools;
+using DocumentFormat.OpenXml.Packaging;
+using System.Xml.Linq;
 
 namespace TextEditor.Controllers
 {
@@ -38,7 +41,8 @@ namespace TextEditor.Controllers
                 fs.Read(temp, 0, (int)fs.Length);
             }
 
-            MemoryStream ms = new MemoryStream(temp);
+            MemoryStream ms = new MemoryStream();
+            ms.Write(temp, 0, temp.Length);
 
             //Docx.dll (Novacode) load file từ bộ nhớ ram
             var docx = DocX.Load(ms);
@@ -91,6 +95,15 @@ namespace TextEditor.Controllers
                 isOK = false;
             }
 
+            if (!(pageFilter.PaperType == PaperSize(docx.PageWidth, docx.PageHeight)))
+            {
+                Err += "PaperType không khớp database là: " + pageFilter.PaperType + " - file là: " + PaperSize(docx.PageWidth, docx.PageHeight) + "\n";
+                isOK = false;
+            }
+
+            ViewBag.Height = docx.PageHeight;
+            ViewBag.Width = docx.PageWidth;
+            ViewBag.Paper = PaperSize(docx.PageWidth, docx.PageHeight);
             //duyệt list bộ lọc từ db
             foreach (var f in filter)
             {
@@ -143,7 +156,32 @@ namespace TextEditor.Controllers
             var fv = new FormatView();
             fv.isOk = isOK;
             ViewBag.Error = Err;
+            ViewBag.Html = WordToHtml(ms);
             return View(fv);
+        }
+
+        public string PaperSize(float w, float h)
+        {
+            Size A3 = new Size { Height = 1190F, Width = 841F };
+            Size A4 = new Size { Height = 841F, Width = 595F };
+
+            if (w == A3.Width && h == A3.Height)
+                return "A3";
+            if (w == A4.Width && h == A4.Height)
+                return "AA";
+
+            return "letter";
+        }
+
+
+        public string WordToHtml(MemoryStream ms)
+        {
+            using (WordprocessingDocument doc = WordprocessingDocument.Open(ms, true))
+            {
+                HtmlConverterSettings settings = new HtmlConverterSettings(){};
+                XElement html = HtmlConverter.ConvertToHtml(doc, settings);
+                return html.ToStringNewLineOnAttributes();
+            }
         }
 
         public class Error
