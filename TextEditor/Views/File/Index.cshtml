@@ -76,7 +76,7 @@
         </td>
         <td>
             <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
-            @Html.ActionLink("Check Gramar","CheckGramar", new { id = @item.Id}) |
+            <a href="@Url.Action("Gramar","Check", new {id = item.Id })">Gramar</a> |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>

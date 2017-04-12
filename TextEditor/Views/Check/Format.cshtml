@@ -5,17 +5,16 @@
     string color = "black";
 }
 
-@if (!Model.isOk)
+@if (!Model.Page.isOk)
 {
-    <h1>Định dạng không khớp</h1>
     color = "red";
 }
 else
 {
-    <h1>Định dạng khớp</h1>
+    color = "black";
 }
 
-<h5 style="margin-top:30px;">Paper Type: @ViewBag.Paper - Width: @ViewBag.Width point - Height: @ViewBag.Height point</h5>
+<h5 style="margin-top:30px;">Paper Type: - File: @Model.Page.PaperType.FileValue - DB: @Model.Page.PaperType.DBValue </h5>
 <div class="row" style="border:solid 1px @color; padding: 50px 0;">
     @Html.Raw(ViewBag.Html)
 </div>
@@ -27,9 +26,9 @@ else
 
         $(document).ready(function () {
 
-            @foreach(var e in ViewBag.Error)
+            @foreach(var e in Model.Properties)
             {
-                @Html.Raw("ColorString(\"" + e+"\"); \n");
+                @Html.Raw("ColorString(\"" + e.Key +"\"); \n");
             }
         });
 

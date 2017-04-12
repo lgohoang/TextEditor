@@ -99,8 +99,5 @@ namespace TextEditor.Models
         }
     }
 
-    public class FormatView
-    {
-        public bool isOk { get; set; }
-    }
+   
 }

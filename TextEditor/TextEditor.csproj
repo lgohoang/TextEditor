@@ -209,6 +209,7 @@
     <Compile Include="Controllers\PagePropertiesFormatController.cs" />
     <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Extends\Library\Convert.cs" />
+    <Compile Include="Extends\Library\Gramar.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -311,6 +312,7 @@
     <Content Include="Views\Check - Copy\Format.cshtml" />
     <Content Include="Views\Check - Copy\SideCover.cshtml" />
     <Content Include="Views\Check\Format.cshtml" />
+    <Content Include="Views\Check\Gramar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,40 @@
+﻿@model TextEditor.Models.Gramar
+
+@{
+    ViewBag.Title = "Format";
+}
+
+
+<div class="row" style="padding: 50px 0;">
+    @*@Html.Raw(ViewBag.Html)*@
+    <h1>Những từ sai chính tả</h1>
+    @foreach (var e in Model.Error)
+    {
+        <p>@e</p>
+    }
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+        @*$(document).ready(function () {
+
+            @foreach(var e in Model.Error)
+            {
+                @Html.Raw("ColorString(\"" + e +"\"); \n");
+            }
+        });*@
+
+        function ColorString(str) {
+            $("span:contains('" + str + "')").each(function () {
+                $(this).html($(this).html().replace(
+                    new RegExp(str, 'g'), '<span style="color:red;">' + str + '</span>'
+                ));
+            });
+        }
+
+    </script>
+}
+

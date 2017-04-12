@@ -9,6 +9,8 @@ using TextEditor.Models;
 using OpenXmlPowerTools;
 using DocumentFormat.OpenXml.Packaging;
 using System.Xml.Linq;
+using TextEditor.Extends;
+using System.Text.RegularExpressions;
 
 namespace TextEditor.Controllers
 {
@@ -16,6 +18,84 @@ namespace TextEditor.Controllers
     public class CheckController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        Extends.Library.Gramar gm = new Extends.Library.Gramar();
+
+        public ActionResult Gramar(int id)
+        {
+            //lấy record file trong database bằng id truyền vào
+            var file = db.FileTable.Find(id);
+            if (file == null) return HttpNotFound();
+
+            //lấy format của trang lúc upload chọn
+            var pageFilter = db.PageFormat.Find(file.PageId);
+            if (pageFilter == null) return HttpNotFound();
+
+            //lay format của loại trang
+            var filter = (from ppf in db.PagePropertiesFormat
+                          where ppf.PageId == pageFilter.Id
+                          orderby ppf.Row ascending
+                          select ppf).ToList();
+            if (filter == null) return HttpNotFound();
+
+            //đọc file vào bộ nhớ ram
+            byte[] temp = null;
+            using (var fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(file.Path + "/" + file.Name), FileMode.Open, FileAccess.Read))
+            {
+                temp = new byte[fs.Length];
+                fs.Read(temp, 0, (int)fs.Length);
+            }
+
+            MemoryStream ms = new MemoryStream();
+            ms.Write(temp, 0, temp.Length);
+
+            //Docx.dll (Novacode) load file từ bộ nhớ ram
+            var docx = DocX.Load(ms);
+
+            //khởi tạo 1 list đoạn văn thường mỗi dòng là một đoạn văn trừ một số trường hợp hy hữu
+            var paragraphs = new List<ParagraphInfo>();
+            int index = 1;
+
+            //tìm kiếm các đoạn văn trong file docx vừa load, xong thêm vào list các đoạn văn ở trên
+            foreach (var p in docx.Paragraphs)
+            {
+                var info = new ParagraphInfo
+                {
+                    Paragraph = p,
+                    Row = index
+                };
+
+                //kiểm tra đoạn văn không phải khoảng trắng, xuống dòng trống thì thêm vào list
+                if (!p.Text.Trim().Equals(""))
+                {
+                    paragraphs.Add(info);
+                    index++;
+                }
+            }
+
+            Models.Gramar gv = new Models.Gramar();
+
+            foreach(var p in paragraphs)
+            {
+                var t = Regex.Replace(p.Paragraph.Text, @"[0-9\-]", string.Empty);
+                var result = Regex.Replace(t, "[~!@#$%^&*()_+`\\-=.,?/'\";:\\]\\[\\–\\{\\}]", string.Empty);
+                var res = result.Split(' ');
+                foreach (var r in res)
+                {
+                    var c = gm.Check(r);
+                    if (!c)
+                    {
+                        gv.Error.Add(r);
+                    }
+                }
+            }
+
+
+            ViewBag.Html = WordToHtml(ms);
+            return View(gv);
+        }
+
+
+
         public ActionResult Format(int id)
         {
             //lấy record file trong database bằng id truyền vào
@@ -69,102 +149,175 @@ namespace TextEditor.Controllers
             }
 
             //khởi tạo từ điển để chứa các lỗi
-            var Error = new List<string>();
+            var fv = new FormatView();
+            fv.Page.isOk = true;
 
-            bool pageIsOK = true;
-            string Err = ""; 
-
+            fv.Page.MarginTop.FileValue = docx.MarginTop.ToString();
+            fv.Page.MarginTop.DBValue = pageFilter.MarginTop.ToString();
             if (!(pageFilter.MarginTop == docx.MarginTop))
             {
-                Err += "MarginTop không khớp database là: "+pageFilter.MarginTop+" - file là: " + docx.MarginTop + "\n";
+                fv.Page.isOk = false;
+                fv.Page.MarginTop.isError = true;
 
-                pageIsOK = false;
             }
+
+            fv.Page.MarginBottom.FileValue = docx.MarginBottom.ToString();
+            fv.Page.MarginBottom.DBValue = pageFilter.MarginBottom.ToString();
             if (!(pageFilter.MarginBottom == docx.MarginBottom))
             {
-                Err += "MarginBottom không khớp database là: " + pageFilter.MarginBottom + " - file là: " + docx.MarginBottom + "\n";
-                pageIsOK = false;
+                fv.Page.isOk = false;
+                fv.Page.MarginBottom.isError = true;
+
             }
+
+            fv.Page.MarginLeft.FileValue = docx.MarginLeft.ToString();
+            fv.Page.MarginLeft.DBValue = pageFilter.MarginLeft.ToString();
             if (!(pageFilter.MarginLeft == docx.MarginLeft))
             {
-                Err += "MarginLeft không khớp database là: " + pageFilter.MarginLeft + " - file là: " + docx.MarginLeft + "\n";
-                pageIsOK = false;
+                fv.Page.isOk = false;
+                fv.Page.MarginLeft.isError = true;
+
             }
+
+            fv.Page.MarginRight.FileValue = docx.MarginRight.ToString();
+            fv.Page.MarginRight.DBValue = pageFilter.MarginRight.ToString();
             if (!(pageFilter.MarginRight == docx.MarginRight))
             {
-                Err += "MarginRight không khớp database là: " + pageFilter.MarginRight + " - file là: " + docx.MarginRight + "\n";
-                pageIsOK = false;
+                fv.Page.isOk = false;
+                fv.Page.MarginRight.isError = true;
+
             }
 
-            if (!(pageFilter.PaperType == PaperSize(docx.PageWidth, docx.PageHeight)))
+            var ppt = PaperSize(docx.PageWidth, docx.PageHeight);
+            fv.Page.PaperType.FileValue = ppt;
+            fv.Page.PaperType.DBValue = pageFilter.PaperType;
+            if (!(pageFilter.PaperType == ppt))
             {
-                Err += "PaperType không khớp database là: " + pageFilter.PaperType + " - file là: " + PaperSize(docx.PageWidth, docx.PageHeight) + "\n";
-                pageIsOK = false;
+                fv.Page.isOk = false;
+                fv.Page.PaperType.isError = true;
+                
             }
 
-            ViewBag.Height = docx.PageHeight;
-            ViewBag.Width = docx.PageWidth;
-            ViewBag.Paper = PaperSize(docx.PageWidth, docx.PageHeight);
             //duyệt list bộ lọc từ db
 
             foreach (var f in filter)
             {
                 bool isOK = true;
+
+                PropertiesView pv = new PropertiesView();
                 //get row check
                 var r = paragraphs[f.Row];
 
                 //nếu 1 dòng có nhiều định dạng thì sai
                 if (r.Paragraph.MagicText.Count > 1)
                 {
-                    Err += "Dòng văn bản \"" + r.Paragraph.Text + "\" có quá nhiều định dạng \n";
-                    Error.Add(r.Paragraph.Text);
                     isOK = false;
-
+                    
                 }
                 else
                 {
 
-
-
                     var format = r.Paragraph.MagicText[0].formatting;
                     if (!(f.Size == format.Size))
                     {
-                        Err += "Dòng văn bản \"" + r.Paragraph.Text + "\" Size không khớp database là: " + f.Size + " - file là: " + format.Size + "\n";
                         isOK = false;
+                        pv.FontSize.isError = true;
+                        pv.FontSize.FileValue = format.Size.ToString();
+                        pv.FontSize.DBValue = f.Size.ToString();
                     }
                     if (!(f.Bold == format.Bold))
                     {
-                        Err += "Dòng văn bản \"" + r.Paragraph.Text + "\" Bold không khớp database là: " + f.Bold + " - file là: " + format.Bold + "\n";
-                        isOK = false;
+                        if (format.Bold == null)
+                        {
+                            if (f.Bold)
+                            {
+                                pv.FontBold.isError = true;
+                                pv.FontBold.FileValue = null;
+                                pv.FontBold.DBValue = f.Bold.ToString();
+                            }
+                            else
+                            {
+                                pv.FontBold.isError = false;
+                            }
+                            
+                        }
+                        else
+                        {
+                            pv.FontBold.isError = true;
+                            pv.FontBold.FileValue = format.Bold.ToString();
+                            pv.FontBold.DBValue = f.Bold.ToString();
+                            isOK = false;
+                        }
+
+                        pv.FontBold.isError = true;
+                        pv.FontBold.FileValue = format.Bold.ToString();
+                        pv.FontBold.DBValue = f.Bold.ToString();
                     }
                     if (!(f.Italic == format.Italic))
                     {
                         if (format.Italic == null)
                         {
+                            if (f.Italic)
+                            {
+                                pv.FontItalic.isError = true;
+                                pv.FontItalic.FileValue = null;
+                                pv.FontItalic.DBValue = f.Italic.ToString();
+                            }
+                            else
+                            {
+                                pv.FontBold.isError = false;
+                            }
 
                         }
                         else
                         {
-                            Err += "Dòng văn bản \"" + r.Paragraph.Text + "\" Italic không khớp database là: " + f.Italic + " - file là: " + format.Italic + "\n";
+                            pv.FontItalic.isError = true;
+                            pv.FontItalic.FileValue = format.Italic.ToString();
+                            pv.FontItalic.DBValue = f.Italic.ToString();
                             isOK = false;
                         }
 
                     }
-                    if (!pageFilter.FontFamily.Equals(format.FontFamily.Name))
+                    if(format.FontFamily == null && pageFilter.FontFamily != null)
                     {
-                        Err += "FontFamily không khớp database là: " + pageFilter.FontFamily + " - file là: " + format.FontFamily.Name + "\n";
                         isOK = false;
                     }
+                    else
+                    {
+                        if (!pageFilter.FontFamily.Equals(format.FontFamily.Name))
+                        {
+                            if (format.FontFamily == null)
+                            {
+                                if (f.Italic)
+                                {
+                                    fv.Page.FontFamily.isError = true;
+                                    fv.Page.FontFamily.FileValue = null;
+                                    fv.Page.FontFamily.DBValue = pageFilter.FontFamily;
+                                }
+                                else
+                                {
+                                    fv.Page.FontFamily.isError = false;
+                                }
+
+                            }
+                            else
+                            {
+                                fv.Page.FontFamily.isError = true;
+                                fv.Page.FontFamily.FileValue = format.FontFamily.Name;
+                                fv.Page.FontFamily.DBValue = pageFilter.FontFamily;
+                                isOK = false;
+                            }
+                        }
+                    }
+                    
                 }
 
                 if (!isOK)
                 {
-                    Error.Add(r.Paragraph.Text);
+                    fv.Properties[r.Paragraph.Text] = pv;
                 }
             }
-            var fv = new FormatView();
-            fv.isOk = pageIsOK;
-            ViewBag.Error = Error;
+
             ViewBag.Html = WordToHtml(ms);
             return View(fv);
         }
@@ -177,7 +330,7 @@ namespace TextEditor.Controllers
             if (w == A3.Width && h == A3.Height)
                 return "A3";
             if (w == A4.Width && h == A4.Height)
-                return "AA";
+                return "A4";
 
             return "letter";
         }
