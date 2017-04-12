@@ -69,44 +69,47 @@ namespace TextEditor.Controllers
             }
 
             //khởi tạo từ điển để chứa các lỗi
-            var Error = new Dictionary<string, Error>();
+            var Error = new List<string>();
 
-            bool isOK = true;
+            bool pageIsOK = true;
             string Err = ""; 
 
             if (!(pageFilter.MarginTop == docx.MarginTop))
             {
                 Err += "MarginTop không khớp database là: "+pageFilter.MarginTop+" - file là: " + docx.MarginTop + "\n";
-                isOK = false;
+
+                pageIsOK = false;
             }
             if (!(pageFilter.MarginBottom == docx.MarginBottom))
             {
                 Err += "MarginBottom không khớp database là: " + pageFilter.MarginBottom + " - file là: " + docx.MarginBottom + "\n";
-                isOK = false;
+                pageIsOK = false;
             }
             if (!(pageFilter.MarginLeft == docx.MarginLeft))
             {
                 Err += "MarginLeft không khớp database là: " + pageFilter.MarginLeft + " - file là: " + docx.MarginLeft + "\n";
-                isOK = false;
+                pageIsOK = false;
             }
             if (!(pageFilter.MarginRight == docx.MarginRight))
             {
                 Err += "MarginRight không khớp database là: " + pageFilter.MarginRight + " - file là: " + docx.MarginRight + "\n";
-                isOK = false;
+                pageIsOK = false;
             }
 
             if (!(pageFilter.PaperType == PaperSize(docx.PageWidth, docx.PageHeight)))
             {
                 Err += "PaperType không khớp database là: " + pageFilter.PaperType + " - file là: " + PaperSize(docx.PageWidth, docx.PageHeight) + "\n";
-                isOK = false;
+                pageIsOK = false;
             }
 
             ViewBag.Height = docx.PageHeight;
             ViewBag.Width = docx.PageWidth;
             ViewBag.Paper = PaperSize(docx.PageWidth, docx.PageHeight);
             //duyệt list bộ lọc từ db
+
             foreach (var f in filter)
             {
+                bool isOK = true;
                 //get row check
                 var r = paragraphs[f.Row];
 
@@ -114,6 +117,7 @@ namespace TextEditor.Controllers
                 if (r.Paragraph.MagicText.Count > 1)
                 {
                     Err += "Dòng văn bản \"" + r.Paragraph.Text + "\" có quá nhiều định dạng \n";
+                    Error.Add(r.Paragraph.Text);
                     isOK = false;
 
                 }
@@ -152,10 +156,15 @@ namespace TextEditor.Controllers
                         isOK = false;
                     }
                 }
+
+                if (!isOK)
+                {
+                    Error.Add(r.Paragraph.Text);
+                }
             }
             var fv = new FormatView();
-            fv.isOk = isOK;
-            ViewBag.Error = Err;
+            fv.isOk = pageIsOK;
+            ViewBag.Error = Error;
             ViewBag.Html = WordToHtml(ms);
             return View(fv);
         }

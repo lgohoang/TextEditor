@@ -1,12 +1,14 @@
 ﻿@model TextEditor.Models.FormatView
+
 @{
     ViewBag.Title = "Format";
+    string color = "black";
 }
 
 @if (!Model.isOk)
 {
     <h1>Định dạng không khớp</h1>
-    <p>@ViewBag.Error</p>
+    color = "red";
 }
 else
 {
@@ -14,7 +16,7 @@ else
 }
 
 <h5 style="margin-top:30px;">Paper Type: @ViewBag.Paper - Width: @ViewBag.Width point - Height: @ViewBag.Height point</h5>
-<div class="row" style="border:solid 1px black; padding: 50px 0;">
+<div class="row" style="border:solid 1px @color; padding: 50px 0;">
     @Html.Raw(ViewBag.Html)
 </div>
 
@@ -25,18 +27,19 @@ else
 
         $(document).ready(function () {
 
-            StringR(str);
-
+            @foreach(var e in ViewBag.Error)
+            {
+                @Html.Raw("ColorString(\"" + e+"\"); \n");
+            }
         });
 
-        var str = "HỌC VIỆN KỸ THUẬT QUÂN SỰ";
-        function StringR(str) {
-            $('span:contains(' + str + ')', document.body).each(function () {
+        function ColorString(str) {
+            $("span:contains('" + str + "')").each(function () {
                 $(this).html($(this).html().replace(
-                    new RegExp(yourstring, 'g'), '<span style="background:red;">' + yourstring + '</span>'
+                    new RegExp(str, 'g'), '<span style="color:red;">' + str + '</span>'
                 ));
-            }​);​
+            });
         }
-        
+
     </script>
 }
