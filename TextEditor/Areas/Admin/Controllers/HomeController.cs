@@ -156,7 +156,7 @@ namespace TextEditor.Areas.Admin.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
+        public ActionResult Edit( EditUserViewModel editUser, params string[] selectedRole)
         {
             if (ModelState.IsValid)
             {
