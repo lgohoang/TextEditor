@@ -125,6 +125,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="VnToolkit">
+      <HintPath>D:\Users\Lgo\Downloads\C# vnToolkit\Outsider\C# vnToolkit\C# vnToolkit- Async\C# vnToolkit- Async\vnTokenizer\bin\Debug\VnToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -199,6 +202,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
     <Compile Include="Controllers\FileApiController.cs" />
+    <Compile Include="Controllers\FileController - Copy.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -207,8 +211,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703301308194_db.cs" />
+    <Compile Include="Migrations\201703301308194_db.Designer.cs">
+      <DependentUpon>201703301308194_db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CompareFormat.cs" />
     <Compile Include="Models\CompareSample.cs" />
     <Compile Include="Models\DocxView.cs" />
     <Compile Include="Models\FileTable.cs" />
@@ -288,9 +297,12 @@
     <Content Include="Views\File\Upload.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\Index - Copy.cshtml" />
+    <Content Include="Views\File\CheckFormat.cshtml" />
+    <Content Include="Views\File\CheckGramar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Extends\vnTokenizer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -306,6 +318,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703301308194_db.resx">
+      <DependentUpon>201703301308194_db.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,37 +7,61 @@ using System.Web.Mvc;
 using TextEditor.Models;
 using System.Net;
 using System.Net.Http;
+using Microsoft.AspNet.Identity;
+using Novacode;
+using VnToolkit;
+using System.Text.RegularExpressions;
 
 namespace TextEditor.Controllers
 {
+    [Authorize]
     public class FileController : Controller
     {
 
         ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: File
         public ActionResult Index()
         {
-            var filetable = db.FileTable.ToList();
+            var userId = User.Identity.GetUserId();
+
+            var filetable = (from f in db.FileTable
+                             where f.UserId == userId
+                             select f).ToList();
+
             var model = new CrudFileTable();
             model.FiletableView = filetable;
-
             return View(model);
         }
+
+        const string path = "~/Upload";
 
         [HttpPost]
         public ActionResult Index(CrudFileTable cft, HttpPostedFileBase fileUpload)
         {
+            if (ModelState.IsValid)
+            {
+                var file = new FileTable();
+                file.Time = DateTime.Now;
+                file.Path = path;
+                file.UserId = User.Identity.GetUserId();
+                file.Name = file.Time.Year+file.Time.Month+file.Time.Day+file.Time.Hour+file.Time.Minute+file.Time.Second +"_"+ Path.GetFileName(fileUpload.FileName);
+                file.Type = cft.FileTableUpload.Type;
 
-                if(fileUpload.ContentLength != 0)
+                if (fileUpload.ContentLength != 0)
                 {
-                    string pathForSaving = Server.MapPath("~/Uploads");
+                    string pathForSaving = Server.MapPath(path);
                     if (CreateFolderIfNeeded(pathForSaving))
                     {
                         try
                         {
                             byte[] t = new byte[fileUpload.InputStream.Length];
                             fileUpload.InputStream.Read(t, 0, (int)fileUpload.InputStream.Length);
-                            WriteFile(Path.GetFileName(fileUpload.FileName), t);
+                            WriteFile(file.Path + "/" + file.Name, t);
+
+                            db.FileTable.Add(file);
+                            db.SaveChanges();
+
                         }
                         catch (Exception ex)
                         {
@@ -45,20 +69,44 @@ namespace TextEditor.Controllers
                         }
                     }
                 }
-            
+                return RedirectToAction("index");
+            }
+            return View(cft);
+        }
 
-            return RedirectToAction("index");
+        public ActionResult Delete(int id)
+        {
+            var f = db.FileTable.Find(id);
+            if (f == null) return HttpNotFound();
+
+            DeleteFile(f.Path + "/" + f.Name);
+
+            db.FileTable.Remove(f);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public void DeleteFile(string filename)
+        {
+            try
+            {
+                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(filename));
+            }
+            catch
+            {
+
+            }
+            
         }
 
         public static void WriteFile(string fileName, byte[] bytes)
         {
-            string path = "~/Upload/";
 
-            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(path + fileName)))
-                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(path + fileName));
+            if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath(fileName)))
+                System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath(fileName));
             try
             {
-                using (FileStream fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(path + fileName), FileMode.CreateNew, FileAccess.Write))
+                using (FileStream fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(fileName), FileMode.CreateNew, FileAccess.Write))
                 {
                     fs.Write(bytes, 0, bytes.Length);
                     fs.Close();
