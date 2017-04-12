@@ -3,7 +3,7 @@
     padding-bottom: 20px;
 }
 
-.navbar-inverse {
+/*.navbar-inverse {
     background-color: #20B1AA;
     border-color: #20B1AA;
     color: #fff;
@@ -18,7 +18,7 @@
     }
 .navbar-inverse .navbar-brand a span:hover {
         color: #eee;
-    }
+    }*/
 .panel-table{
     padding:0;
 }
