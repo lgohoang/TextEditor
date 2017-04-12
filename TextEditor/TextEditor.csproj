@@ -206,19 +206,24 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PageFormatController.cs" />
+    <Compile Include="Controllers\PagePropertiesFormatController.cs" />
     <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Extends\Library\Convert.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704111146560_db.cs" />
-    <Compile Include="Migrations\201704111146560_db.Designer.cs">
-      <DependentUpon>201704111146560_db.cs</DependentUpon>
+    <Compile Include="Migrations\201704120758027_db.cs" />
+    <Compile Include="Migrations\201704120758027_db.Designer.cs">
+      <DependentUpon>201704120758027_db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704120822228_db1.cs" />
+    <Compile Include="Migrations\201704120822228_db1.Designer.cs">
+      <DependentUpon>201704120822228_db1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CompareFormat.cs" />
-    <Compile Include="Models\CompareSample.cs" />
+    <Compile Include="Models\Compare.cs" />
     <Compile Include="Models\DocxView.cs" />
     <Compile Include="Models\FileTable.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -299,6 +304,19 @@
     <Content Include="Views\File\Index - Copy.cshtml" />
     <Content Include="Views\File\CheckFormat.cshtml" />
     <Content Include="Views\File\CheckGramar.cshtml" />
+    <Content Include="Views\File\PageFormat.cshtml" />
+    <Content Include="Views\File\PageFormatEdit.cshtml" />
+    <Content Include="Views\File\PagePropertiesFormat.cshtml" />
+    <Content Include="Views\PageFormat\Create.cshtml" />
+    <Content Include="Views\PageFormat\Delete.cshtml" />
+    <Content Include="Views\PageFormat\Details.cshtml" />
+    <Content Include="Views\PageFormat\Edit.cshtml" />
+    <Content Include="Views\PageFormat\Index.cshtml" />
+    <Content Include="Views\PagePropertiesFormat\Create.cshtml" />
+    <Content Include="Views\PagePropertiesFormat\Delete.cshtml" />
+    <Content Include="Views\PagePropertiesFormat\Details.cshtml" />
+    <Content Include="Views\PagePropertiesFormat\Edit.cshtml" />
+    <Content Include="Views\PagePropertiesFormat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,8 +338,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704111146560_db.resx">
-      <DependentUpon>201704111146560_db.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704120758027_db.resx">
+      <DependentUpon>201704120758027_db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704120822228_db1.resx">
+      <DependentUpon>201704120822228_db1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

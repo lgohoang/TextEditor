@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Novacode;
 using VnToolkit;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
 
 namespace TextEditor.Controllers
 {
@@ -19,6 +20,7 @@ namespace TextEditor.Controllers
     {
 
         ApplicationDbContext db = new ApplicationDbContext();
+
 
         // GET: File
         public ActionResult Index()
