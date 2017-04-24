@@ -201,14 +201,13 @@
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
-    <Compile Include="Controllers\FileApiController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageFormatController.cs" />
     <Compile Include="Controllers\PagePropertiesFormatController.cs" />
-    <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Extends\Library\Convert.cs" />
+    <Compile Include="Extends\Library\File.cs" />
     <Compile Include="Extends\Library\Gramar.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -227,6 +226,23 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css.css" />
+    <Content Include="Extends\Tokenizer\Dict.txt" />
+    <Content Include="Extends\Tokenizer\lib\commons-cli-1.2.jar" />
+    <Content Include="Extends\Tokenizer\lib\junit.jar" />
+    <Content Include="Extends\Tokenizer\lib\maxent-2.5.2.jar" />
+    <Content Include="Extends\Tokenizer\lib\opennlp-tools-1.4.3.jar" />
+    <Content Include="Extends\Tokenizer\lib\trove.jar" />
+    <Content Include="Extends\Tokenizer\lib\vn.hus.nlp.fsm-1.0.0.jar" />
+    <Content Include="Extends\Tokenizer\lib\vn.hus.nlp.sd-2.0.0.jar" />
+    <Content Include="Extends\Tokenizer\lib\vn.hus.nlp.utils-1.0.0.jar" />
+    <Content Include="Extends\Tokenizer\models\tokenization\automata\dfaLexicon.xml" />
+    <Content Include="Extends\Tokenizer\models\tokenization\automata\externalLexicon.xml" />
+    <Content Include="Extends\Tokenizer\models\tokenization\bigram\bigram.xml" />
+    <Content Include="Extends\Tokenizer\models\tokenization\bigram\unigram.xml" />
+    <Content Include="Extends\Tokenizer\models\tokenization\lexers\lexers.xml" />
+    <Content Include="Extends\Tokenizer\models\tokenization\normalization\rules.txt" />
+    <Content Include="Extends\Tokenizer\models\tokenization\prefix\namedEntityPrefix.xml" />
+    <Content Include="Extends\Tokenizer\vn.hus.nlp.tokenizer-4.1.1.jar" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -240,6 +256,10 @@
     <Content Include="Areas\Admin\Views\Home\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Edit.cshtml" />
+    <Content Include="Extends\Tokenizer\vnTokenizer.bat" />
+    <Content Include="Extends\Tokenizer\vnTokenizer.sh" />
+    <Content Include="Extends\Tokenizer\tokenizer.properties" />
+    <Content Include="Extends\Tokenizer\models\sentDetection\VietnameseSD.bin.gz" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -308,9 +328,6 @@
     <Content Include="Views\PagePropertiesFormat\Details.cshtml" />
     <Content Include="Views\PagePropertiesFormat\Edit.cshtml" />
     <Content Include="Views\PagePropertiesFormat\Index.cshtml" />
-    <Content Include="Views\Check - Copy\Cover.cshtml" />
-    <Content Include="Views\Check - Copy\Format.cshtml" />
-    <Content Include="Views\Check - Copy\SideCover.cshtml" />
     <Content Include="Views\Check\Format.cshtml" />
     <Content Include="Views\Check\Gramar.cshtml" />
   </ItemGroup>
