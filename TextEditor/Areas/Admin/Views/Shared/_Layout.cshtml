@@ -29,7 +29,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
                     <li>@Html.ActionLink("Quản lý user", "Users", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
-                    <li>@Html.ActionLink("Check format", "Format", "Check", new { area = "" }, new { @class = "nav navbar-nav" })</li>
+                    <li>@Html.ActionLink("Check format", "Format", "Check", new { area = "Amin" }, new { @class = "nav navbar-nav" })</li>
                     <li>@Html.ActionLink("Lịch sử", "History", "History", new { area = "Amin" }, new { @class = "navbar-nav" })</li>
                 </ul>
                 @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

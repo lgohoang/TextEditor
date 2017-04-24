@@ -2,102 +2,44 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1> TÌM HIỂU MÔ HÌNH MVC</h1>
+<div class="jumbotron" style="font-size:13px;">
+    <h2 class="text-center" ><b style="color:#337ab7;"> Hệ Thống Kiểm Tra Lỗi Chính Tả Và Định Dạng Văn Bản</b></h2>
     <p>
-        Văn Khương | 05/10/2014 | PHP nâng cao | No Comments
+       <h6 class="text-right"> Văn Khương | 05/10/2014 | PHP nâng cao | No Comments</h6>
+        <br/>
+        <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Khoa-hoc-lap-trinh-ASP-NET-MVC-tai-IMicroSoft-Viet-Nam-866787878.png" style="width:90%" /><br/>
         Trong quá trình xây dựng – phát triển – vận hành và bảo trì một hệ thống hay một ứng dụng – phần mềm các chuyên gia sẽ sử dụng những mô hình nghiệp vụ dành riêng, chúng được tạo nên từ nhiều thành phần độc lập nhau nhưng sẽ có sự tương tác nhau. Những mô hình này, sẽ giúp người sử dụng (manager, user , sponsor, deverloper and so more) có một cái nhìn tổng quan nhất về chức năng và các luồng xử lý có trong dự án, từ đó họ có một điểm chung để trao đổi đưa ra các yêu cầu, dễ dàng tiếp cận – tìm hiểu các chức năng nghiệp vụ đang có và tiến hành xây dựng và phát triển dự án một cách nhanh chóng và hiệu quả nhất. Một mô hình có thể phi chuẩn hoặc hợp chuẩn, nó sẽ có những đặc thù riêng và chỉ áp dụng cho những loại dự án cụ thể, từ đó các chuyên gia sẽ lựa chọn mô hình nào phù hợp; những mô hình chuẩn được ưa thích sử dụng rộng rãi và phổ biến.
 
         Hiện nay, trong các dự án website các chuyên gia (manager + deverloper …) thường áp dụng mô hình chuẩn Model – View – Controller (hay MVC) trong quá trình xây dựng – phát triển, nó đã khá quen thuộc và phổ biến với dân lập trình. Vậy mô hình MVC là gì? Nó gồm những thành phần nào? Áp dụng của mô hình MVC như thế nào cho hiệu quả và chính xác nhất? Trong bài viết này, chúng ta sẽ đi tìm hiểu tất cả các vấn đề đó để có thể hiểu được một khái niệm quan trọng trong lập trình.
+        <br />
+        <h4><b> I.MÔ HÌNH MVC LÀ GÌ?</b> </h4>  
 
-        MÔ HÌNH MVC LÀ GÌ?
-
-        Khái niệm
-
+       <p>1. Khái niệm<p>
+    <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Khoa-hoc-lap-trinh-ASP-NET-MVC-tai-IMicroSoft-Viet-Nam-8656576787856567667.png" style="width:90%" />
+    <br/>
         Mô hình MVC là một chuẩn mô hình và đóng vai trò quan trọng trong quá trình xây dựng – phát triển – vận hành và bảo trì một hệ thống hay một ứng dụng – phần mềm. Nó tạo ra một mô hình 3 lớp Model – View – Controller tách biệt và tương tác nhau, giúp các chuyên gia có thể dễ dàng dựa vào mô hình để trao đổi và xử lý những nghiệp vụ một cách nhanh chóng. Đây là một mô hình đã xuất hiện từ những năm 70 của thế kỷ 20 tại phòng thí nghiệm Xerox PARC ở Palo Alto, nó không phụ thuộc vào môi trường, nền tảng xây dựng hay ngôn ngữ phát triển. Chúng ta có thể áp dụng mô hình MVC vào các dự án trong môi trường Windows, Linux… và sử dụng bất kỳ ngôn ngữ nào như PHP, ASP, JSP…
-
-
-
-        mo-hinh-mvc-1
-
+    <br/>
         Mô hình MVC được chia làm 3 lớp xử lý gồm Model – View – Controller :
-
-        Model : là nơi chứa những nghiệp vụ tương tác với dữ liệu hoặc hệ quản trị cơ sở dữ liệu (mysql, mssql… ); nó sẽ bao gồm các class/function xử lý nhiều nghiệp vụ như kết nối database, truy vấn dữ liệu, thêm – xóa – sửa dữ liệu…
-        View : là nới chứa những giao diện như một nút bấm, khung nhập, menu, hình ảnh… nó đảm nhiệm nhiệm vụ hiển thị dữ liệu và giúp người dùng tương tác với hệ thống.
-        Controller : là nới tiếp nhận những yêu cầu xử lý được gửi từ người dùng, nó sẽ gồm những class/ function xử lý nhiều nghiệp vụ logic giúp lấy đúng dữ liệu thông tin cần thiết nhờ các nghiệp vụ lớp Model cung cấp và hiển thị dữ liệu đó ra cho người dùng nhờ lớp View
-        Sự tương tác giữa các lớp trong mô hình MVC
-
-        Controller – View sẽ lấy những hình ảnh, nút bấm…hoặc hiển thị dữ liệu được trả ra từ Controller để người dùng có thể quan sát và thao tác. Trong sự tương tác này cũng có thể không có dữ liệu được lấy từ Model và khi đó nó chỉ chịu trách nhiệm hiển thị đơn thuần như hình ảnh, nút bấm…
-
-        Controller – Model là luồng xử lý khi controller tiếp nhận yêu cầu và các tham số đầu vào từ người dùng, controller sẽ sử dụng các lớp/hàm trong Model cần thiết để lấy ra những dữ liệu chính xác.
-
-        View – Model có thể tương tác với nhau mà không qua Controller, nó chỉ đảm nhận hiển thị dữ liệu chứ không phải qua bất kỳ xử lý nghiệp vụ logics nào. Nó giống như các vùng dữ liệu hiển thị tĩnh trên các website như block slidebar…
-
-        Mô hình MVC có thể áp dụng cho nhiều loại dự án khác nhau : dự án website, dự án ứng dụng – phần mềm,… nhưng trong phạm vi bài viết chúng ta sẽ chỉ đi tìm hiểu mô hình này được áp dụng như nào trong các dự án xây dựng và phát triển website.
-
+                          <br />
         Quy trình hoạt động mô hình MVC trong dự án website
-
+                          <br />
         Mô hình MVC chuẩn cho website
-
-
-
-        Mô hình trên là thể hiện mô hình MVC trong các dự án website và sẽ hoạt động theo quy trình sau:
-
-        Người dùng sử dụng một BROWSER trình duyệt web bất kỳ (Firefox, Chrome, IE,…) để có thể gửi những yêu cầu (HTTP Request) có thể kèm theo những dữ liệu nhập tới những CONTROLLER xử lý tương ứng. Việc xác định Controllerr xử lý sẽ dựa vào một bộ Routing điều hướng.
-        Khi CONTROLLER nhận được yêu cầu gửi tới, nó sẽ chịu trách nhiệm kiểm tra yêu cầu đó có cần dữ liệu từ MODEL hay không? Nếu có, nó sẽ sử dụng các class/function cần thiết trong MODEL và nó sẽ trả ra kết quả( Resulting Arrays), khi đó CONTROLLER sẽ xử lý giá trị đó và trả ra VIEW để hiển thị. CONTROLLER sẽ xác định các VIEW tương ứng để hiển thị đúng với yêu cầu.
-        Khi nhận được dữ liệu từ CONTROLLER, VIEW sẽ chịu trách nhiệm xây dựng các thành phẩn hiển thị như hình ảnh, thông tin dữ liệu… và trả về GUI Content để CONTROLLER  đưa ra kết quả lên màn hình BROWSER.
-        BROWSER sẽ nhận giá trị trả về( HTTP Response) và sẽ hiển thị với người dùng. Kết thúc một quy trình hoạt động.
-        Mô hình chuẩn MVC trong các dự án website
-
-        Ưu điểm và nhược điểm của mô hình MVC
-
-        Ưu điểm :
-
-        Các dự án có thể áp dụng ngay mô hình MVC mà không phụ thuộc môi trường, nền tảng xây dựng hay ngôn ngữ lập trình phát triển;
-        Quy hoạch các class/ function vào các thành phần riêng biệt Controller – Model – View, khi đó sẽ dễ dàng xây dựng – phát triển – quản lý – vận hành và bảo trì một dự án, tạo sự rõ ràng, trong sáng trong quá trình phát triển dự án, kiểm soát được các luồng xử lý và tạo ra các thành phần xử lý nghiệp vụ chuyên biệt hóa.
-        Tạo thành mô hình chuẩn cho nhiều dự án, các chuyên gia sẽ tiếp cận – tìm hiểu những dự án đó một cách nhanh chóng và hiệu quả . Nếu bạn nắm rõ mô hình MVC của một dự án nào đó, thì khi tiếp cận với một dự án khác mà bạn chưa từng biết hoặc tiếp xúc, nhưng nó lại được xây dựng với mô hình MVC thì sẽ không khó khăn gì mà cực kỳ dễ dàng. Học một nhưng có thể hiểu và sử dụng được mười.
-        Giúp các chuyên gia lập trình, nhà quản lý, nhà đầu tư, PM… có thể hiểu được dự án hoạt động ra sao hoặc giúp các lập trình viên dễ dàng quản lý – phát triển dự án. Nó không phải ngôn ngữ, nhưng khi họ cùng nhìn vào nó thì sẽ tự hiểu nó là gì, khi đó họ có thể trao đổi các yêu cầu và bàn bạc công việc.
-        Đây là một mô hình chuẩn, nó tối ưu nhất hiện nay so với nhiều mô hình khác và được sử dụng trong nhiều dự án và nhiều lĩnh vực, đặc biệt trong công nghệ sản xuất ứng dụng – phần mềm. Các lập trình viên sử dụng mô hình chuẩn MVC để có thể dễ dàng phân phối và chuyển giao công nghệ.
-        Đây là mô hình đơn giản, xử lý những nghiệp vụ đơn giản, và dễ dàng triển khai với các dự án nhỏ.
-        Nhược điểm:
-
-        Yêu cầu về chuyên môn khá cao, có kiến thức vững về các mô hình chuẩn;Khó triển khai với những dự án yêu cầu phúc tạp hơn. Hiện nay đang có một khái niệm mô hình mới đó là HMVC đang dần thay thế cho MVC
-        Ứng dụng thực tế mô hình MVC
-
+                          <br />
         Có rất nhiều hệ thống, ứng dụng – phần mềm được xây dựng theo chuẩn mô hình MVC và được giới thiệu, phân phối như :
-
-        Zend Framework 1 & 2
+                          <br />
+     <p>   Zend Framework 1 & 2
         Yii Framework
         Phalcon
         Codeingteger
         Đây là một vài ví dụ về những PHP Framework được xây dựng và áp dụng mô hình MVC rất hiệu quả hiện nay. Các bạn có thể tìm hiểu các tài liệu liên quan được cung cấp để có thể hiểu hơn chúng được phát triển và vận hành như thế nào.
 
-        Xem thêm : PHP Framework là gì?
-
-        KẾT LUẬN
+        Xem thêm : PHP Framework là gì?</p>
+    <br/>
+       <h4><b> II.KẾT LUẬN</b></h4>
 
         Như vậy, mô hình MVC là một khái niệm rất quan trọng giúp các bạn xây dựng – phát triển dự án của bạn. Đây cũng là kiến thức cơ bản nhất giúp bạn có thể trở thành một chuyên gia lập trình viên, nó giúp bạn dễ dàng khi tiếp cận các dự án được xây dựng theo chuẩn MVC, và đặc biệt giúp các bạn đang tìm hiểu các bộ mã nguồn mở framework sẽ cực kỳ dễ học – tìm hiểu, kể cả Zend Framework 2 đang được xem là framework không lồ và khó với nhiều người.
+    <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Cach-lap-trinh-vien-Java-kiem-tien-98347234.png" style="width:90%" />
+    <br />
     </p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
