@@ -6,11 +6,9 @@
 
 
 <div class="row" style="padding: 50px 0;">
-    @*@Html.Raw(ViewBag.Html)*@
-    <h1>Những từ sai chính tả</h1>
-    @foreach (var e in Model.Error)
+    @foreach(var a in ViewBag.ErrorList)
     {
-        <p>@e</p>
+        <p>@a</p>
     }
 </div>
 

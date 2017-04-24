@@ -11,6 +11,7 @@ using DocumentFormat.OpenXml.Packaging;
 using System.Xml.Linq;
 using TextEditor.Extends;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace TextEditor.Controllers
 {
@@ -19,23 +20,14 @@ namespace TextEditor.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         Extends.Library.Gramar gm = new Extends.Library.Gramar();
+        new Extends.Library.File File = new Extends.Library.File();
+
 
         public ActionResult Gramar(int id)
         {
             //lấy record file trong database bằng id truyền vào
             var file = db.FileTable.Find(id);
             if (file == null) return HttpNotFound();
-
-            //lấy format của trang lúc upload chọn
-            var pageFilter = db.PageFormat.Find(file.PageId);
-            if (pageFilter == null) return HttpNotFound();
-
-            //lay format của loại trang
-            var filter = (from ppf in db.PagePropertiesFormat
-                          where ppf.PageId == pageFilter.Id
-                          orderby ppf.Row ascending
-                          select ppf).ToList();
-            if (filter == null) return HttpNotFound();
 
             //đọc file vào bộ nhớ ram
             byte[] temp = null;
@@ -48,51 +40,135 @@ namespace TextEditor.Controllers
             MemoryStream ms = new MemoryStream();
             ms.Write(temp, 0, temp.Length);
 
-            //Docx.dll (Novacode) load file từ bộ nhớ ram
-            var docx = DocX.Load(ms);
 
-            //khởi tạo 1 list đoạn văn thường mỗi dòng là một đoạn văn trừ một số trường hợp hy hữu
-            var paragraphs = new List<ParagraphInfo>();
-            int index = 1;
+            string pathIn = "~/Temp/" + file.Name + ".txt";
+            string pathOut = "~/Temp/Tokenizer_" + file.Name + ".txt";
+            string pathDict = "~/Extends/Tokenizer/Dict.txt";
 
-            //tìm kiếm các đoạn văn trong file docx vừa load, xong thêm vào list các đoạn văn ở trên
-            foreach (var p in docx.Paragraphs)
+            File.DocxToTxt(ms, System.Web.HttpContext.Current.Server.MapPath(pathIn));
+
+            File.Tokenizer(System.Web.HttpContext.Current.Server.MapPath(pathIn), System.Web.HttpContext.Current.Server.MapPath(pathOut));
+
+            string text = System.IO.File.ReadAllText(System.Web.HttpContext.Current.Server.MapPath(pathOut));
+            IEnumerable<string> dict = System.IO.File.ReadLines(System.Web.HttpContext.Current.Server.MapPath(pathDict));
+
+            string[] array = text.Split(' ');
+
+            List<string> Error = new List<string>();
+
+            foreach(var a in array)
             {
-                var info = new ParagraphInfo
+                if (!a.Equals(""))
                 {
-                    Paragraph = p,
-                    Row = index
-                };
-
-                //kiểm tra đoạn văn không phải khoảng trắng, xuống dòng trống thì thêm vào list
-                if (!p.Text.Trim().Equals(""))
-                {
-                    paragraphs.Add(info);
-                    index++;
-                }
-            }
-
-            Models.Gramar gv = new Models.Gramar();
-
-            foreach(var p in paragraphs)
-            {
-                var t = Regex.Replace(p.Paragraph.Text, @"[0-9\-]", string.Empty);
-                var result = Regex.Replace(t, "[~!@#$%^&*()_+`\\-=.,?/'\";:\\]\\[\\–\\{\\}]", string.Empty);
-                var res = result.Split(' ');
-                foreach (var r in res)
-                {
-                    var c = gm.Check(r);
-                    if (!c)
+                    var s = a.Replace("_", " ");
+                    var sa = s.Split(' ');
+                    if(sa.Length > 2)
                     {
-                        gv.Error.Add(r);
+                        foreach(var s2 in sa)
+                        {
+                            var i = dict.Where(x => x.Equals(s2, StringComparison.OrdinalIgnoreCase)).ToList(); ;
+
+                            if (i.Count <= 0)
+                            {
+                                Debug.WriteLine(sa + " sai chính tả");
+                                Error.Add(s2);
+                            }
+                        }
                     }
+                    else
+                    {
+                        var i = dict.Where(x => x.Equals(s, StringComparison.OrdinalIgnoreCase)).ToList(); ;
+
+                        if (i.Count <= 0)
+                        {
+                            Debug.WriteLine(s + " sai chính tả");
+                            Error.Add(s);
+                        }
+                    }
+                    
                 }
             }
 
 
-            ViewBag.Html = WordToHtml(ms);
-            return View(gv);
+
+            ViewBag.ErrorList = Error;
+
+            return View();
         }
+
+        //public ActionResult Gramar(int id)
+        //{
+        //    //lấy record file trong database bằng id truyền vào
+        //    var file = db.FileTable.Find(id);
+        //    if (file == null) return HttpNotFound();
+
+        //    //lấy format của trang lúc upload chọn
+        //    var pageFilter = db.PageFormat.Find(file.PageId);
+        //    if (pageFilter == null) return HttpNotFound();
+
+        //    //lay format của loại trang
+        //    var filter = (from ppf in db.PagePropertiesFormat
+        //                  where ppf.PageId == pageFilter.Id
+        //                  orderby ppf.Row ascending
+        //                  select ppf).ToList();
+        //    if (filter == null) return HttpNotFound();
+
+        //    //đọc file vào bộ nhớ ram
+        //    byte[] temp = null;
+        //    using (var fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath(file.Path + "/" + file.Name), FileMode.Open, FileAccess.Read))
+        //    {
+        //        temp = new byte[fs.Length];
+        //        fs.Read(temp, 0, (int)fs.Length);
+        //    }
+
+        //    MemoryStream ms = new MemoryStream();
+        //    ms.Write(temp, 0, temp.Length);
+
+        //    //Docx.dll (Novacode) load file từ bộ nhớ ram
+        //    var docx = DocX.Load(ms);
+
+        //    //khởi tạo 1 list đoạn văn thường mỗi dòng là một đoạn văn trừ một số trường hợp hy hữu
+        //    var paragraphs = new List<ParagraphInfo>();
+        //    int index = 1;
+
+        //    //tìm kiếm các đoạn văn trong file docx vừa load, xong thêm vào list các đoạn văn ở trên
+        //    foreach (var p in docx.Paragraphs)
+        //    {
+        //        var info = new ParagraphInfo
+        //        {
+        //            Paragraph = p,
+        //            Row = index
+        //        };
+
+        //        //kiểm tra đoạn văn không phải khoảng trắng, xuống dòng trống thì thêm vào list
+        //        if (!p.Text.Trim().Equals(""))
+        //        {
+        //            paragraphs.Add(info);
+        //            index++;
+        //        }
+        //    }
+
+        //    Models.Gramar gv = new Models.Gramar();
+
+        //    foreach(var p in paragraphs)
+        //    {
+        //        var t = Regex.Replace(p.Paragraph.Text, @"[0-9\-]", string.Empty);
+        //        var result = Regex.Replace(t, "[~!@#$%^&*()_+`\\-=.,?/'\";:\\]\\[\\–\\{\\}]", string.Empty);
+        //        var res = result.Split(' ');
+        //        foreach (var r in res)
+        //        {
+        //            var c = gm.Check(r);
+        //            if (!c)
+        //            {
+        //                gv.Error.Add(r);
+        //            }
+        //        }
+        //    }
+
+
+        //    ViewBag.Html = WordToHtml(ms);
+        //    return View(gv);
+        //}
 
 
 
