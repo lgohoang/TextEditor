@@ -5,25 +5,37 @@
 }
 
 
-<div class="row" style="padding: 50px 0;">
+@*<div class="row" style="padding: 50px 0;">
     @foreach(var a in ViewBag.ErrorList)
     {
         <p>@a</p>
     }
+</div>*@
+
+<div class="row" style="margin-top:20px;">
+    <div class="col-md-12">
+        @Html.Raw(ViewBag.Html)
+    </div>
 </div>
+
+
+
 
 
 @section Scripts
 {
     <script>
 
-        @*$(document).ready(function () {
+        $(document).ready(function () {
 
-            @foreach(var e in Model.Error)
+            @foreach(var e in ViewBag.ErrorList)
             {
-                @Html.Raw("ColorString(\"" + e +"\"); \n");
+                if(e != "\"")
+                {
+                    @Html.Raw("ColorString(\"" + e +"\"); \n");
+                }
             }
-        });*@
+        });
 
         function ColorString(str) {
             $("span:contains('" + str + "')").each(function () {
