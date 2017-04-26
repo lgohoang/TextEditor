@@ -61,36 +61,44 @@ namespace TextEditor.Controllers
                 if (!a.Equals(""))
                 {
                     var s = a.Replace("_", " ");
-                    var sa = s.Split(' ');
-                    if(sa.Length > 2)
+
+                    var t = Regex.Replace(s, @"[0-9\-]", string.Empty);
+                    var result = Regex.Replace(t, "[~!@#$%^&*()_+`\\-=.,?/'\";:\\]\\[\\–\\{\\}]", string.Empty);
+
+                    if(result != "")
                     {
-                        foreach(var s2 in sa)
+                        var sa = result.Split(' ');
+                        if (sa.Length > 2)
                         {
-                            var i = dict.Where(x => x.Equals(s2, StringComparison.OrdinalIgnoreCase)).ToList(); ;
+                            foreach (var s2 in sa)
+                            {
+                                var i = dict.Where(x => x.Equals(s2, StringComparison.OrdinalIgnoreCase)).ToList(); ;
+
+                                if (i.Count <= 0)
+                                {
+                                    Debug.WriteLine(sa + " sai chính tả");
+                                    Error.Add(s2.Trim('\n'));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var i = dict.Where(x => x.Equals(s, StringComparison.OrdinalIgnoreCase)).ToList(); ;
 
                             if (i.Count <= 0)
                             {
-                                Debug.WriteLine(sa + " sai chính tả");
-                                Error.Add(s2);
+                                Debug.WriteLine(s + " sai chính tả");
+                                Error.Add(s.Trim('\n'));
                             }
                         }
                     }
-                    else
-                    {
-                        var i = dict.Where(x => x.Equals(s, StringComparison.OrdinalIgnoreCase)).ToList(); ;
-
-                        if (i.Count <= 0)
-                        {
-                            Debug.WriteLine(s + " sai chính tả");
-                            Error.Add(s);
-                        }
-                    }
+                    
                     
                 }
             }
 
 
-
+            ViewBag.Html = WordToHtml(ms);
             ViewBag.ErrorList = Error;
 
             return View();
