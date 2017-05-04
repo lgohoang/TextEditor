@@ -28,14 +28,16 @@ else
 
             @foreach(var e in Model.Properties)
             {
-                @Html.Raw("ColorString(\"" + e.Key +"\"); \n");
+                @Html.Raw("ColorString(\"" + e.Key + "\", \"" + e.Value.Name + "\"); \n");
             }
+
+            $('[data-toggle="tooltip"]').tooltip(); 
         });
 
-        function ColorString(str) {
+        function ColorString(str, error) {
             $("span:contains('" + str + "')").each(function () {
                 $(this).html($(this).html().replace(
-                    new RegExp(str, 'g'), '<span style="color:red;">' + str + '</span>'
+                    new RegExp(str, 'g'), '<span style="color:red;" data-toggle="tooltip" title="' + error + '" >' + str + '</span>'
                 ));
             });
         }
