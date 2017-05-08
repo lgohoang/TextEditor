@@ -247,6 +247,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\New_Alienware_Laptop_HD_Desktop_Background_Wallpaper.jpg" />
     <Content Include="image\windows-club-engage-background.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
