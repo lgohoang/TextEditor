@@ -50,7 +50,6 @@ audio:not([controls]) {
 [hidden] {
   display: none;
 }
-
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -786,6 +785,7 @@ pre code {
 .row {
   margin-right: -15px;
   margin-left: -15px;
+  padding-top: 40px;
 }
 
 .row:before,

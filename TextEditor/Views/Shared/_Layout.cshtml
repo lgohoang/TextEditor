@@ -6,13 +6,14 @@
  
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
  
 
 </head>
-<body>
-    <div class="navbar navbar-default navbar-fixed-top">
+<body >
+    <div class="navbar navbar-default navbar-fixed-top custom-navbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,8 +26,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Page Format", "Index", "PageFormat")</li>
-                    <li>@Html.ActionLink("Page Properties Format", "Index", "PagePropertiesFormat")</li>
+                    <li>@Html.ActionLink("Định dạng trang", "Index", "PageFormat")</li>
+                    <li>@Html.ActionLink("Thuộc tính của định dạng trang", "Index", "PagePropertiesFormat")</li>
                     <li>@Html.ActionLink("Upload File", "Index", "File")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -35,10 +36,6 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
  
