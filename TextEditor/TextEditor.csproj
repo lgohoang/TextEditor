@@ -212,6 +212,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705081839463_db.cs" />
+    <Compile Include="Migrations\201705081839463_db.Designer.cs">
+      <DependentUpon>201705081839463_db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Compare.cs" />
@@ -226,6 +230,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\landing-page.css" />
     <Content Include="Extends\Tokenizer\Dict.txt" />
     <Content Include="Extends\Tokenizer\lib\commons-cli-1.2.jar" />
     <Content Include="Extends\Tokenizer\lib\junit.jar" />
@@ -247,8 +253,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="image\New_Alienware_Laptop_HD_Desktop_Background_Wallpaper.jpg" />
-    <Content Include="image\windows-club-engage-background.jpg" />
+    <Content Include="image\banner-bg.jpg" />
+    <Content Include="image\dog.png" />
+    <Content Include="image\intro-bg.jpg" />
+    <Content Include="image\ipad.png" />
+    <Content Include="image\phones.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -262,6 +271,8 @@
     <Content Include="Extends\Tokenizer\vnTokenizer.sh" />
     <Content Include="Extends\Tokenizer\tokenizer.properties" />
     <Content Include="Extends\Tokenizer\models\sentDetection\VietnameseSD.bin.gz" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -350,6 +361,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705081839463_db.resx">
+      <DependentUpon>201705081839463_db.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
