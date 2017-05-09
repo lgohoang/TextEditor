@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using TextEditor.Controllers
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách tập tin";
 
     List<SelectListItem> type = new List<SelectListItem>();
     type.Add(new SelectListItem { Text = "Cover", Value = "Cover" });
@@ -14,77 +14,74 @@
 
 }
 
-<h1>File của @User.Identity.GetUserName()</h1>
+<div class="col-md-12">
+    <h1 class="text-center">Các tập tin của bạn</h1>
 
-<div class="row" style="margin-top:20px;">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">File</h3>
-            </div>
-            <div class="panel-body">
-               @using (Html.BeginForm("index", "file", FormMethod.Post, new { enctype = "multipart/form-data" }))
-               {
-                @Html.AntiForgeryToken()
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <input type="file" name="fileUpload" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">File</h3>
+                </div>
+                <div class="panel-body">
+                   @using (Html.BeginForm("index", "file", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                   {
+                    @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="file" name="fileUpload" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(m => m.FileTableUpload.PageId, new SelectList(ViewBag.PageFormatList, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
+                                @Html.ValidationMessageFor(model => model.FileTableUpload.PageId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                <button id="btn_upload_file" class="btn btn-primary" type="submit"><i class="fa fa-upload"></i> Tải lên</button>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            @Html.DropDownListFor(m => m.FileTableUpload.PageId, new SelectList(ViewBag.PageFormatList, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
-                            @Html.ValidationMessageFor(model => model.FileTableUpload.PageId, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-md-4">
-                            <button id="btn_upload_file" class="btn btn-default" type="submit">Upload</button>
-                        </div>
-                    </div>
-                }
+                    }
                 
+                </div>
             </div>
         </div>
     </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                Tên tệp tin
+            </th>
+            <th>
+                Tải lên lúc
+            </th>
+            <th>
+                Loại tập tin
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model.FiletableView) {
+            <tr>
+                <td>
+                    <a href="Upload/@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @ppfc.GetPageFormatName(item.PageId)
+                </td>
+                <td>
+                    <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
+                    <a href="@Url.Action("Gramar","Check", new {id = item.Id })">Gramar</a> |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Time
-        </th>
-        <th>
-            Type
-        </th>
-        <th>
-
-        </th>
-    </tr>
-
-@foreach (var item in Model.FiletableView) {
-    <tr>
-        <td>
-            <a href="Upload/@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @ppfc.GetPageFormatName(item.PageId)
-        </td>
-        <td>
-            <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
-            <a href="@Url.Action("Gramar","Check", new {id = item.Id })">Gramar</a> |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
-
-</table>
-
-@section Scripts
-{
-
-}

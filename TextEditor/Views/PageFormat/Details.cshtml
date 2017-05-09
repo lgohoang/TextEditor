@@ -1,74 +1,65 @@
 ﻿@model TextEditor.Models.PageFormat
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết định dạng";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>PageFormat</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MarginLeft)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MarginLeft)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MarginRight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MarginRight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MarginTop)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MarginTop)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MarginBottom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MarginBottom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaperType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PaperType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FontFamily)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FontFamily)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Chi tiết định dạng</h2>
+        <br />
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarginLeft)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarginRight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarginTop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarginBottom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaperType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FontFamily)
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.MarginLeft)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.MarginRight)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.MarginTop)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.MarginBottom)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.PaperType)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.FontFamily)
+                </td>
+            </tr>
+        </table>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

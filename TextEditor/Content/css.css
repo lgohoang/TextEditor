@@ -25,45 +25,20 @@
 .panel-table{
     padding:0;
 }
+    */
 
-.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
-    color: rgba(52, 87, 117, 0.94);
+.topnav .navbar-brand, .topnav .navbar-nav > li > a {
+    color: #FFF;
 }
 
-    .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
-        color: rgba(104, 123, 140, 0.55);
-    }
+.topnav .navbar-brand:hover, .topnav .navbar-nav > li > a:hover, .topnav .navbar-nav > li > a:active {
+    color: #EE0;
+}
 
-.custom-navbar {
+body {
+    padding-top: 70px;
+}
+
+.topnav {
     background: #136eb4;
 }
-
-.main-page {
-    height: calc(100vh - 90px);
-    padding: 30vh;
-    background: rgba(0, 224, 255, 0.3);
-    color: #FFF;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-}
-
-.main-features .block {
-    height: 35vh;
-    background: #FFF;
-    padding: 10vh 0;
-    font-size: 16px;
-    text-transform: uppercase;
-    transition: all 0.5s ease;
-}
-
-.main-features .block:hover {
-    box-shadow: 0 0 10px #f60;
-    font-size: 18px;
-}
-
-.main-features .block .icon {
-    font-size: 24px;
-    margin-bottom: 20px;
-    display: block;
-}*/

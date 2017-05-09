@@ -2,66 +2,75 @@
 @using TextEditor.Controllers
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Các thuộc tính định dạng trang";
 
     PagePropertiesFormatController ppfc = new PagePropertiesFormatController();
     
 }
 
-<h2>Index</h2>
+<div class="col-md-12">
+    <h2 class="text-center">Các thuộc tính định dạng trang</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PageId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Row)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Italic)
-        </th>
-        <th></th>
-    </tr>
+    <p class="text-right">
+        <a class="btn btn-primary" href="@Url.Action("Create", "PagePropertiesFormat")"><i class="fa fa-plus"></i> Thêm mới</a>
+    </p>
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PageId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Row)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bold)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Italic)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @ppfc.GetPageFormatName(item.PageId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Row)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Italic)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @ppfc.GetPageFormatName(item.PageId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Row)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Italic)
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="@Url.Action("Edit", "PagePropertiesFormat", new { id = item.Id })" title="Sửa">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    <a class="btn btn-success" href="@Url.Action("Details", "PagePropertiesFormat", new { id = item.Id })" title="Xem chi tiết">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "PagePropertiesFormat", new { id = item.Id })" title="Xóa">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
