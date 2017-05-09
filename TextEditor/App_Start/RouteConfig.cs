@@ -37,7 +37,6 @@ namespace TextEditor
               action = "Edit",
               product_id = UrlParameter.Optional
           });
-
         }
     }
 }

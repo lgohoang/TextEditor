@@ -1,10 +1,115 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<a name="about"></a>
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>DoIT</h1>
+                    <h3>Phần mềm kiểm tra nỗi chính tả và định dạng file word</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                          @*  <a class=" btn btn-default" href="@Url.RouteUrl("Định dạng trang", new { area="", Controller = "PageFormat", Action = "Index",@class = "btn btn-default btn-lg" })"<i class="fa fa-twitter fa-fw"></i></a>*@
+                          
+                            <a href="./PageFormat/Index" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Định dạng trang</span></a>
+                        </li>
+                        <li>
+                            <a href="./PagePropertiesFormat/Index" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Thuộc tính trang</span></a>
+                        </li>
+                        <li>
+                            <a href="./File/Index" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Uplload file</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.intro-header -->
+<!-- Page Content -->
+<a name="services"></a>
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Định dạng trang:</h2>
+                <p class="lead"><a target="_blank" href="./PageFormat/Index"">Định dạng trang </a> cho phép thiết lập các thông số tiêu chuẩn của trang để phục vụ cho quá trình kiểm tra định dạng trang về sau.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="image/ipad.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-a -->
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Thuộc tính trang</h2>
+                <p class="lead">Tính năng này cho phép người dùng thiết lập các <a target="_blank" href="./PagePropertiesFormat/Index">thuộc tính của trang, </a>các thông số của trang để sau này kiểm tra định dạng của nó.</p>
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <img class="img-responsive" src="image/dog.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Upload file</h2>
+                <p class="lead"><a target="_blank" href="./File/Index">Upload file: </a>Là một phần không thể thiếy của ứng dụng,là bước đầu tiên đưa bạn đến với các tính năng ưu việt của ứng dụng.Bạn chỉ cần upload file word(dạng docx) là bạn có thể dùng các tính năng ưu việt của ứng dụng để kiểm tra xem tài liệu của bạ có đúng chuẩn,chỉ tiêu hay không.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="image/phones.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-a -->
+<a name="contact"></a>
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Để sử dụng ứng dụng bạn cần:</h2>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="./Account/Login" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Đăng nhập</span></a>
+                    </li>
+                    <li>
+                        <a href="./Account/Register" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Đăng ký</span></a>
+                    </li>
+                    @*<li>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
 
 
-
-<div class="main-page">
+@*<div class="main-page">
     <h1 class="text-center">Hệ Thống Kiểm Tra Lỗi Chính Tả Và Định Dạng Văn Bản</h1>
 </div>
 
@@ -29,4 +134,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
