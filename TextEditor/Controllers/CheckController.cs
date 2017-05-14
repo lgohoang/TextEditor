@@ -16,7 +16,7 @@ using System.Drawing;
 
 namespace TextEditor.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CheckController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

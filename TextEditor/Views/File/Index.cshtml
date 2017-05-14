@@ -16,32 +16,32 @@
 
 <div class="col-md-12">
     <h1 class="text-center">Các tập tin của bạn</h1>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">File</h3>
-                </div>
-                <div class="panel-body">
-                   @using (Html.BeginForm("index", "file", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                   {
-                    @Html.AntiForgeryToken()
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <input type="file" name="fileUpload" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                @Html.DropDownListFor(m => m.FileTableUpload.PageId, new SelectList(ViewBag.PageFormatList, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
-                                @Html.ValidationMessageFor(model => model.FileTableUpload.PageId, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-4">
-                                <button id="btn_upload_file" class="btn btn-primary" type="submit"><i class="fa fa-upload"></i> Tải lên</button>
+    </div>
+<div class="row" style="margin-top:20px;">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">File</h3>
+            </div>
+            <div class="panel-body">
+               @using (Html.BeginForm("index", "file", FormMethod.Post, new { enctype = "multipart/form-data" }))
+               {
+                @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="file" name="fileUpload" />
                             </div>
                         </div>
-                    }
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.FileTableUpload.PageId, new SelectList(ViewBag.PageFormatList, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
+                            @Html.ValidationMessageFor(model => model.FileTableUpload.PageId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            <button id="btn_upload_file" class="btn btn-default" type="submit">Upload</button>
+                        </div>
+                    </div>
+                }
                 
                 </div>
             </div>
@@ -83,5 +83,9 @@
             </tr>
         }
 
-    </table>
-</div>
+</table>
+
+@section Scripts
+{
+
+}
