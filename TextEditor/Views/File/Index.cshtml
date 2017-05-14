@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @using TextEditor.Controllers
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách tập tin";
 
     List<SelectListItem> type = new List<SelectListItem>();
     type.Add(new SelectListItem { Text = "Cover", Value = "Cover" });
@@ -14,7 +14,8 @@
 
 }
 
-<h1>File của @User.Identity.GetUserName()</h1>
+<div class="col-md-12">
+    <h1 class="text-center">Các tập tin của bạn</h1>
 
 <div class="row" style="margin-top:20px;">
     <div class="col-md-12">
@@ -29,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="file" name="fileUpload" onchange="validate_fileupload(this.value);" />
+                                <input type="file" name="fileUpload" />
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -42,63 +43,49 @@
                     </div>
                 }
                 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Time
-        </th>
-        <th>
-            Type
-        </th>
-        <th>
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <th>
+                Tên tệp tin
+            </th>
+            <th>
+                Tải lên lúc
+            </th>
+            <th>
+                Loại tập tin
+            </th>
+            <th>
 
-        </th>
-    </tr>
+            </th>
+        </tr>
 
-@foreach (var item in Model.FiletableView) {
-    <tr>
-        <td>
-            <a href="Upload/@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @ppfc.GetPageFormatName(item.PageId)
-        </td>
-        <td>
-            <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
-            <a href="@Url.Action("Gramar","Check", new {id = item.Id })">Gramar</a> |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model.FiletableView) {
+            <tr>
+                <td>
+                    <a href="Upload/@item.Name">@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @ppfc.GetPageFormatName(item.PageId)
+                </td>
+                <td>
+                    <a href="@Url.Action("Format","Check", new {id = item.Id })">Check</a> |
+                    <a href="@Url.Action("Gramar","Check", new {id = item.Id })">Gramar</a> |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
 </table>
 
 @section Scripts
 {
-    <script>
-        function validate_fileupload(fileName) {
-            var allowed_extensions = new Array("docx");
-            var file_extension = fileName.split('.').pop(); // split function will split the filename by dot(.), and pop function will pop the last element from the array which will give you the extension as well. If there will be no extension then it will return the filename.
 
-            for (var i = 0; i <= allowed_extensions.length; i++) {
-                if (allowed_extensions[i] == file_extension) {
-                    return true; // valid file extension
-                }
-            }
-            window.alert("Only Support File DOCX");
-            return false;
-        }
-    </script>
-    
 }

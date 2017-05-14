@@ -25,7 +25,10 @@ namespace TextEditor
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/css.css"));
+                      "~/Content/css.css",
+                      "~/Content/landing-page.css",
+                       "~/Content/font-awesome.min.css"
+                      ));
         }
     }
 }

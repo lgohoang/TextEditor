@@ -1,11 +1,12 @@
-﻿body {
-    padding-top: 50px;
+﻿/*body {
+    padding-top: 70px;
     padding-bottom: 20px;
+    background-image: url("/image/New_Alienware_Laptop_HD_Desktop_Background_Wallpaper.jpg");
 }
 
-/*.navbar-inverse {
+.navbar-inverse {
     background-color: #20B1AA;
-    border-color: #20B1AA;
+    border-color: #20B1AA;s
     color: #fff;
     border-radius: 0px;
 }
@@ -18,7 +19,26 @@
     }
 .navbar-inverse .navbar-brand a span:hover {
         color: #eee;
-    }*/
+    }
+
+
 .panel-table{
     padding:0;
+}
+    */
+
+.topnav .navbar-brand, .topnav .navbar-nav > li > a {
+    color: #FFF;
+}
+
+.topnav .navbar-brand:hover, .topnav .navbar-nav > li > a:hover, .topnav .navbar-nav > li > a:active {
+    color: #EE0;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.topnav {
+    background: #136eb4;
 }

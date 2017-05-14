@@ -1,45 +1,137 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang chủ";
 }
-
-<div class="jumbotron" style="font-size:13px;">
-    <h2 class="text-center" ><b style="color:#337ab7;"> Hệ Thống Kiểm Tra Lỗi Chính Tả Và Định Dạng Văn Bản</b></h2>
-    <p>
-       <h6 class="text-right"> Văn Khương | 05/10/2014 | PHP nâng cao | No Comments</h6>
-        <br/>
-        <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Khoa-hoc-lap-trinh-ASP-NET-MVC-tai-IMicroSoft-Viet-Nam-866787878.png" style="width:90%" /><br/>
-        Trong quá trình xây dựng – phát triển – vận hành và bảo trì một hệ thống hay một ứng dụng – phần mềm các chuyên gia sẽ sử dụng những mô hình nghiệp vụ dành riêng, chúng được tạo nên từ nhiều thành phần độc lập nhau nhưng sẽ có sự tương tác nhau. Những mô hình này, sẽ giúp người sử dụng (manager, user , sponsor, deverloper and so more) có một cái nhìn tổng quan nhất về chức năng và các luồng xử lý có trong dự án, từ đó họ có một điểm chung để trao đổi đưa ra các yêu cầu, dễ dàng tiếp cận – tìm hiểu các chức năng nghiệp vụ đang có và tiến hành xây dựng và phát triển dự án một cách nhanh chóng và hiệu quả nhất. Một mô hình có thể phi chuẩn hoặc hợp chuẩn, nó sẽ có những đặc thù riêng và chỉ áp dụng cho những loại dự án cụ thể, từ đó các chuyên gia sẽ lựa chọn mô hình nào phù hợp; những mô hình chuẩn được ưa thích sử dụng rộng rãi và phổ biến.
-
-        Hiện nay, trong các dự án website các chuyên gia (manager + deverloper …) thường áp dụng mô hình chuẩn Model – View – Controller (hay MVC) trong quá trình xây dựng – phát triển, nó đã khá quen thuộc và phổ biến với dân lập trình. Vậy mô hình MVC là gì? Nó gồm những thành phần nào? Áp dụng của mô hình MVC như thế nào cho hiệu quả và chính xác nhất? Trong bài viết này, chúng ta sẽ đi tìm hiểu tất cả các vấn đề đó để có thể hiểu được một khái niệm quan trọng trong lập trình.
-        <br />
-        <h4><b> I.MÔ HÌNH MVC LÀ GÌ?</b> </h4>  
-
-       <p>1. Khái niệm<p>
-    <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Khoa-hoc-lap-trinh-ASP-NET-MVC-tai-IMicroSoft-Viet-Nam-8656576787856567667.png" style="width:90%" />
-    <br/>
-        Mô hình MVC là một chuẩn mô hình và đóng vai trò quan trọng trong quá trình xây dựng – phát triển – vận hành và bảo trì một hệ thống hay một ứng dụng – phần mềm. Nó tạo ra một mô hình 3 lớp Model – View – Controller tách biệt và tương tác nhau, giúp các chuyên gia có thể dễ dàng dựa vào mô hình để trao đổi và xử lý những nghiệp vụ một cách nhanh chóng. Đây là một mô hình đã xuất hiện từ những năm 70 của thế kỷ 20 tại phòng thí nghiệm Xerox PARC ở Palo Alto, nó không phụ thuộc vào môi trường, nền tảng xây dựng hay ngôn ngữ phát triển. Chúng ta có thể áp dụng mô hình MVC vào các dự án trong môi trường Windows, Linux… và sử dụng bất kỳ ngôn ngữ nào như PHP, ASP, JSP…
-    <br/>
-        Mô hình MVC được chia làm 3 lớp xử lý gồm Model – View – Controller :
-                          <br />
-        Quy trình hoạt động mô hình MVC trong dự án website
-                          <br />
-        Mô hình MVC chuẩn cho website
-                          <br />
-        Có rất nhiều hệ thống, ứng dụng – phần mềm được xây dựng theo chuẩn mô hình MVC và được giới thiệu, phân phối như :
-                          <br />
-     <p>   Zend Framework 1 & 2
-        Yii Framework
-        Phalcon
-        Codeingteger
-        Đây là một vài ví dụ về những PHP Framework được xây dựng và áp dụng mô hình MVC rất hiệu quả hiện nay. Các bạn có thể tìm hiểu các tài liệu liên quan được cung cấp để có thể hiểu hơn chúng được phát triển và vận hành như thế nào.
-
-        Xem thêm : PHP Framework là gì?</p>
-    <br/>
-       <h4><b> II.KẾT LUẬN</b></h4>
-
-        Như vậy, mô hình MVC là một khái niệm rất quan trọng giúp các bạn xây dựng – phát triển dự án của bạn. Đây cũng là kiến thức cơ bản nhất giúp bạn có thể trở thành một chuyên gia lập trình viên, nó giúp bạn dễ dàng khi tiếp cận các dự án được xây dựng theo chuẩn MVC, và đặc biệt giúp các bạn đang tìm hiểu các bộ mã nguồn mở framework sẽ cực kỳ dễ học – tìm hiểu, kể cả Zend Framework 2 đang được xem là framework không lồ và khó với nhiều người.
-    <img src="http://imic.edu.vn/Content/Galleries/CKFinder/images/Cach-lap-trinh-vien-Java-kiem-tien-98347234.png" style="width:90%" />
-    <br />
-    </p>
+<a name="about"></a>
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>SPELLAT</h1>
+                    <h3>Hệ thống kiểm tra nỗi chính tả và định dạng văn bản</h3>
+                    <hr class="intro-divider">
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                          @*  <a class=" btn btn-default" href="@Url.RouteUrl("Định dạng trang", new { area="", Controller = "PageFormat", Action = "Index",@class = "btn btn-default btn-lg" })"<i class="fa fa-twitter fa-fw"></i></a>*@
+                          
+                            <a href="./PageFormat/Index" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Kiểm tra định dạng văn bản</span></a>
+                        </li>
+                        <li>
+                            <a href="./PagePropertiesFormat/Index" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Kiểm tra lỗi chính tả</span></a>
+                        </li>
+                        <li>
+                            <a href="./File/Index" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Quản lí tài liệu</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.intro-header -->
+<!-- Page Content -->
+<a name="services"></a>
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Định dạng trang:</h2>
+                <p class="lead"><a target="_blank" href="./PageFormat/Index"">Định dạng trang </a> cho phép thiết lập các thông số tiêu chuẩn của trang để phục vụ cho quá trình kiểm tra định dạng trang về sau.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="image/ipad.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-a -->
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Thuộc tính trang</h2>
+                <p class="lead">Tính năng này cho phép người dùng thiết lập các <a target="_blank" href="./PagePropertiesFormat/Index">thuộc tính của trang, </a>các thông số của trang để sau này kiểm tra định dạng của nó.</p>
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <img class="img-responsive" src="image/dog.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-b -->
+<div class="content-section-a">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Upload file</h2>
+                <p class="lead"><a target="_blank" href="./File/Index">Upload file: </a>Là một phần không thể thiếy của ứng dụng,là bước đầu tiên đưa bạn đến với các tính năng ưu việt của ứng dụng.Bạn chỉ cần upload file word(dạng docx) là bạn có thể dùng các tính năng ưu việt của ứng dụng để kiểm tra xem tài liệu của bạ có đúng chuẩn,chỉ tiêu hay không.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="image/phones.png" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content-section-a -->
+<a name="contact"></a>
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Để sử dụng ứng dụng bạn cần:</h2>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="./Account/Login" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Đăng nhập</span></a>
+                    </li>
+                    <li>
+                        <a href="./Account/Register" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Đăng ký</span></a>
+                    </li>
+                    @*<li>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
 </div>
 
+
+@*<div class="main-page">
+    <h1 class="text-center">Hệ Thống Kiểm Tra Lỗi Chính Tả Và Định Dạng Văn Bản</h1>
+</div>
+
+<div class="main-features text-center">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="block">
+                <p class="icon glyphicon glyphicon-pencil"></p>
+                Kiểm tra lỗi chính tả
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="block">
+                <p class="icon glyphicon glyphicon-text-width"></p>
+                Định dạng văn bản
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="block">
+                <p class="icon glyphicon glyphicon-font"></p>
+                Quản lý lưu trữ tài liệu
+            </div>
+        </div>
+    </div>
+</div>*@

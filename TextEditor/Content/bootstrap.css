@@ -50,7 +50,6 @@ audio:not([controls]) {
 [hidden] {
   display: none;
 }
-
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
