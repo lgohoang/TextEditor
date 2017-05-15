@@ -31,7 +31,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)</li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)</li>
+                    }
                     @*<li>@Html.ActionLink("Định dạng trang", "Index", "PageFormat")</li>
                     <li>@Html.ActionLink("Thuộc tính của định dạng trang", "Index", "PagePropertiesFormat")</li>*@
                     <li>@Html.ActionLink("Upload File", "Index", "File")</li>
