@@ -12,7 +12,7 @@ using TextEditor.Models;
 
 namespace TextEditor.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
