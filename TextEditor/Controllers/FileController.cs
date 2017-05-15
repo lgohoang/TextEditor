@@ -15,7 +15,7 @@ using TextEditor.Controllers;
 
 namespace TextEditor.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class FileController : Controller
     {
 
