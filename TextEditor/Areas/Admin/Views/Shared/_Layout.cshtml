@@ -28,7 +28,11 @@
             <div class="navbar-collapse collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
-                    <li>@Html.ActionLink("Quản lý user", "Users", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Quản lý user", "Users", "Home", new { area = "Admin" }, new { @class = "navbar-nav" })</li>
+                    }
+
                     @*<li>@Html.ActionLink("Lịch sử", "History", "History", new { area = "Amin" }, new { @class = "navbar-nav" })</li>*@
                     <li>@Html.ActionLink("Định dạng trang", "Index", "PageFormat", new { area = "" }, new { })</li>
                     <li>@Html.ActionLink("Thuộc tính của định dạng trang", "Index", "PagePropertiesFormat", new { area = "" }, new { })</li>
