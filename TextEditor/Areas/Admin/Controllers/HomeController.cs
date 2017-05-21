@@ -14,7 +14,7 @@ using TextEditor.Areas.Admin.Models;
 
 namespace TextEditor.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Support")]
     public class HomeController : Controller
     {
         // GET: Admin/Home

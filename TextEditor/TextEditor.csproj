@@ -201,11 +201,14 @@
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
+    <Compile Include="Controllers\FileApiController.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PageFormatController.cs" />
     <Compile Include="Controllers\PagePropertiesFormatController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Extends\Library\Convert.cs" />
     <Compile Include="Extends\Library\File.cs" />
     <Compile Include="Extends\Library\Gramar.cs" />
