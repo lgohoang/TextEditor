@@ -252,8 +252,9 @@
     <Content Include="image\banner-bg.jpg" />
     <Content Include="image\dog.png" />
     <Content Include="image\intro-bg.jpg" />
-    <Content Include="image\ipad.png" />
+    <Content Include="image\ipad1.png" />
     <Content Include="image\phones.png" />
+    <Content Include="image\spellcheck.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
