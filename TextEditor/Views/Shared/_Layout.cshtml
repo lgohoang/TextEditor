@@ -37,7 +37,10 @@
                     }
                     @*<li>@Html.ActionLink("Định dạng trang", "Index", "PageFormat")</li>
                     <li>@Html.ActionLink("Thuộc tính của định dạng trang", "Index", "PagePropertiesFormat")</li>*@
-                    <li>@Html.ActionLink("Upload File", "Index", "File")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Upload File", "Index", "File")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

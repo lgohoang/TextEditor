@@ -5,9 +5,17 @@ using System.Web;
 
 namespace TextEditor.Models
 {
+    public class FormatGroup
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
     public class PageFormat
     {
         public int Id { get; set; }
+
+        public int GroupId { get; set; }
+
         public string Name { get; set; }
         public int MarginLeft { get; set; }
         public int MarginRight { get; set; }
