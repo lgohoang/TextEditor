@@ -1,7 +1,10 @@
 ﻿@model TextEditor.Models.PageFormat
-
 @{
     ViewBag.Title = "Thêm mới định dạng trang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> item = new List<SelectListItem>();
+    item.Add(new SelectListItem { Text = "Cm", Value = "True" });
+    item.Add(new SelectListItem { Text = "Point", Value = "False" });
 }
 
 <div class="col-md-12">
@@ -15,6 +18,14 @@
                 <div class="form-horizontal">
                     <br />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.isCentimeter, htmlAttributes: new { @for = "PageId", @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(m => m.isCentimeter, new SelectList(item, "Value", "Text"), new { @id = "PageId", @class = "selectpicker form-control" })
+                            @Html.ValidationMessageFor(model => model.isCentimeter, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.GroupId, htmlAttributes: new { @for = "PageId", @class = "control-label col-md-2" })

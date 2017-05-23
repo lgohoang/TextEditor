@@ -16,12 +16,14 @@ using System.Drawing;
 
 namespace TextEditor.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize()]
     public class CheckController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         Extends.Library.Gramar gm = new Extends.Library.Gramar();
         new Extends.Library.File File = new Extends.Library.File();
+
+        Extends.Library.Convert convert = new Extends.Library.Convert();
 
 
         public ActionResult Gramar(int id)
@@ -172,42 +174,89 @@ namespace TextEditor.Controllers
             var fv = new FormatView();
             fv.Page.isOk = true;
 
-            fv.Page.MarginTop.FileValue = docx.MarginTop.ToString();
-            fv.Page.MarginTop.DBValue = pageFilter.MarginTop.ToString();
-            if (!(pageFilter.MarginTop == docx.MarginTop))
+            if (pageFilter.isCentimeter)
             {
-                fv.Page.isOk = false;
-                fv.Page.MarginTop.isError = true;
+                fv.Page.MarginTop.FileValue = docx.MarginTop.ToString();
+                fv.Page.MarginTop.DBValue = pageFilter.MarginTop.ToString();
+
+                if (!(convert.PaperClipsToCentimeters(pageFilter.MarginTop) == convert.PaperClipsToCentimeters(docx.MarginTop)))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginTop.isError = true;
+
+                }
+
+                fv.Page.MarginBottom.FileValue = docx.MarginBottom.ToString();
+                fv.Page.MarginBottom.DBValue = pageFilter.MarginBottom.ToString();
+
+
+                if (!(convert.PaperClipsToCentimeters(pageFilter.MarginBottom) == convert.PaperClipsToCentimeters(docx.MarginBottom)))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginBottom.isError = true;
+
+                }
+
+                fv.Page.MarginLeft.FileValue = docx.MarginLeft.ToString();
+                fv.Page.MarginLeft.DBValue = pageFilter.MarginLeft.ToString();
+                if (!(convert.PaperClipsToCentimeters(pageFilter.MarginLeft) == convert.PaperClipsToCentimeters(docx.MarginLeft)))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginLeft.isError = true;
+
+                }
+
+                fv.Page.MarginRight.FileValue = docx.MarginRight.ToString();
+                fv.Page.MarginRight.DBValue = pageFilter.MarginRight.ToString();
+                if (!(convert.PaperClipsToCentimeters(pageFilter.MarginRight) == convert.PaperClipsToCentimeters(docx.MarginRight)))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginRight.isError = true;
+
+                }
 
             }
-
-            fv.Page.MarginBottom.FileValue = docx.MarginBottom.ToString();
-            fv.Page.MarginBottom.DBValue = pageFilter.MarginBottom.ToString();
-            if (!(pageFilter.MarginBottom == docx.MarginBottom))
+            else
             {
-                fv.Page.isOk = false;
-                fv.Page.MarginBottom.isError = true;
+                fv.Page.MarginTop.FileValue = docx.MarginTop.ToString();
+                fv.Page.MarginTop.DBValue = pageFilter.MarginTop.ToString();
+
+                if (!(pageFilter.MarginTop == docx.MarginTop))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginTop.isError = true;
+
+                }
+
+                fv.Page.MarginBottom.FileValue = docx.MarginBottom.ToString();
+                fv.Page.MarginBottom.DBValue = pageFilter.MarginBottom.ToString();
+                if (!(pageFilter.MarginBottom == docx.MarginBottom))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginBottom.isError = true;
+
+                }
+
+                fv.Page.MarginLeft.FileValue = docx.MarginLeft.ToString();
+                fv.Page.MarginLeft.DBValue = pageFilter.MarginLeft.ToString();
+                if (!(pageFilter.MarginLeft == docx.MarginLeft))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginLeft.isError = true;
+
+                }
+
+                fv.Page.MarginRight.FileValue = docx.MarginRight.ToString();
+                fv.Page.MarginRight.DBValue = pageFilter.MarginRight.ToString();
+                if (!(pageFilter.MarginRight == docx.MarginRight))
+                {
+                    fv.Page.isOk = false;
+                    fv.Page.MarginRight.isError = true;
+
+                }
+
 
             }
-
-            fv.Page.MarginLeft.FileValue = docx.MarginLeft.ToString();
-            fv.Page.MarginLeft.DBValue = pageFilter.MarginLeft.ToString();
-            if (!(pageFilter.MarginLeft == docx.MarginLeft))
-            {
-                fv.Page.isOk = false;
-                fv.Page.MarginLeft.isError = true;
-
-            }
-
-            fv.Page.MarginRight.FileValue = docx.MarginRight.ToString();
-            fv.Page.MarginRight.DBValue = pageFilter.MarginRight.ToString();
-            if (!(pageFilter.MarginRight == docx.MarginRight))
-            {
-                fv.Page.isOk = false;
-                fv.Page.MarginRight.isError = true;
-
-            }
-
             var ppt = PaperSize(docx.PageWidth, docx.PageHeight);
             fv.Page.PaperType.FileValue = ppt;
             fv.Page.PaperType.DBValue = pageFilter.PaperType;

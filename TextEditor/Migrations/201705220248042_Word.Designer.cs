@@ -13,7 +13,7 @@ namespace TextEditor.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201705210751043_Word"; }
+            get { return "201705220248042_Word"; }
         }
         
         string IMigrationMetadata.Source

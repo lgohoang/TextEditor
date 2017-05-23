@@ -12,15 +12,16 @@ namespace TextEditor.Models
     }
     public class PageFormat
     {
+        public bool isCentimeter { get; set; }
         public int Id { get; set; }
 
         public int GroupId { get; set; }
 
         public string Name { get; set; }
-        public int MarginLeft { get; set; }
-        public int MarginRight { get; set; }
-        public int MarginTop { get; set; }
-        public int MarginBottom { get; set; }
+        public float MarginLeft { get; set; }
+        public float MarginRight { get; set; }
+        public float MarginTop { get; set; }
+        public float MarginBottom { get; set; }
         public string PaperType { get; set; }
         public string FontFamily { get; set; }
     }

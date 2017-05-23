@@ -48,7 +48,7 @@ namespace TextEditor.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GroupId,Name,MarginLeft,MarginRight,MarginTop,MarginBottom,PaperType,FontFamily")] PageFormat pageFormat)
+        public ActionResult Create([Bind(Include = "Id,isCentimeter,GroupId,Name,MarginLeft,MarginRight,MarginTop,MarginBottom,PaperType,FontFamily")] PageFormat pageFormat)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace TextEditor.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GroupId,Name,MarginLeft,MarginRight,MarginTop,MarginBottom,PaperType,FontFamily")] PageFormat pageFormat)
+        public ActionResult Edit([Bind(Include = "Id,isCentimeter,GroupId,Name,MarginLeft,MarginRight,MarginTop,MarginBottom,PaperType,FontFamily")] PageFormat pageFormat)
         {
             if (ModelState.IsValid)
             {

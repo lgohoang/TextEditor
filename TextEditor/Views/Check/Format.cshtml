@@ -13,8 +13,15 @@ else
 {
     color = "black";
 }
-
 <h5 style="margin-top:30px;">Paper Type: - File: @Model.Page.PaperType.FileValue - DB: @Model.Page.PaperType.DBValue </h5>
+@if (@Model.Page.PaperType.FileValue.Equals(@Model.Page.PaperType.DBValue))
+{
+    <p>Đúng khổ giấy</p>
+}
+@if (!@Model.Page.PaperType.FileValue.Equals(@Model.Page.PaperType.DBValue))
+{
+    <p stype="collor: red">Sai khổ giấy</p>
+}
 <div class="row" style="border:solid 1px @color; padding: 50px 0;">
     @Html.Raw(ViewBag.Html)
 </div>

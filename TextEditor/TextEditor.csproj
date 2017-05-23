@@ -215,9 +215,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705210751043_Word.cs" />
-    <Compile Include="Migrations\201705210751043_Word.Designer.cs">
-      <DependentUpon>201705210751043_Word.cs</DependentUpon>
+    <Compile Include="Migrations\201705220248042_Word.cs" />
+    <Compile Include="Migrations\201705220248042_Word.Designer.cs">
+      <DependentUpon>201705220248042_Word.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705220731000_db.cs" />
+    <Compile Include="Migrations\201705220731000_db.Designer.cs">
+      <DependentUpon>201705220731000_db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705220757546_db1.cs" />
+    <Compile Include="Migrations\201705220757546_db1.Designer.cs">
+      <DependentUpon>201705220757546_db1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705220758471_db2.cs" />
+    <Compile Include="Migrations\201705220758471_db2.Designer.cs">
+      <DependentUpon>201705220758471_db2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -347,6 +359,11 @@
     <Content Include="Views\PagePropertiesFormat\Index.cshtml" />
     <Content Include="Views\Check\Format.cshtml" />
     <Content Include="Views\Check\Gramar.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Delete.cshtml" />
+    <Content Include="Views\Group\Details.cshtml" />
+    <Content Include="Views\Group\Edit.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -367,8 +384,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705210751043_Word.resx">
-      <DependentUpon>201705210751043_Word.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705220248042_Word.resx">
+      <DependentUpon>201705220248042_Word.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705220731000_db.resx">
+      <DependentUpon>201705220731000_db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705220757546_db1.resx">
+      <DependentUpon>201705220757546_db1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705220758471_db2.resx">
+      <DependentUpon>201705220758471_db2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

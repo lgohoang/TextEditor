@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Sửa user</h2>
+<center><h2>Chỉnh sửa thông tin người dùng</h2><</center>
 
 
 @using (Html.BeginForm())
@@ -17,35 +17,45 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         <div class="form-group">
-            @Html.LabelFor(model=>model.FullName,new {@class="control-label col-md-2" })
+            <div class="control-label col-md-2">
+                <label for="FullName">Họ tên</label>
+            </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(model=>model.FullName, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">
+                <label for="Email">Email</label>
+            </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">
+                <label for="Address">Địa chỉ</label>
+            </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Address)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">
+                <label for="PhoneNumber">Số điện thoại</label>
+            </div>
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PhoneNumber)
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Roles", new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">
+                <label for="Role">Quyền</label>
+            </div>
             <span class=" col-md-10">
                 @foreach (var item in Model.RolesList)
                 {
